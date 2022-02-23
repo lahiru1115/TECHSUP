@@ -11,7 +11,8 @@ require_once('../../includes/functions.inc.php');
 <head>
     <title>Admin | Register</title>
     <style>
-        <?php include "../../css/adminOutline.css"; ?><?php include "../../css/adminForm.css"; ?>
+        <?php include "../../css/adminOutline.css";
+        include "../../css/adminForm.css"; ?>
     </style>
 </head>
 
@@ -70,7 +71,7 @@ require_once('../../includes/functions.inc.php');
     </nav>
 
     <div class="body">
-        <form name="adform" method="post" action="../../includes/adminRegister.inc.php">
+        <form method="post" action="../../includes/adminRegister.inc.php">
             <table>
                 <tr>
                     <td><label>Username</label></td>

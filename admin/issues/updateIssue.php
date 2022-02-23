@@ -12,7 +12,8 @@ $row = issueGet($conn);
 <head>
     <title>Admin | Edit Issue</title>
     <style>
-        <?php include "../../css/adminOutline.css"; ?><?php include "../../css/adminForm.css"; ?>
+        <?php include "../../css/adminOutline.css";
+        include "../../css/adminForm.css"; ?>
     </style>
 </head>
 

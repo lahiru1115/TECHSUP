@@ -12,7 +12,8 @@ $row = updateGet($conn);
 <head>
     <title>Admin | Edit User</title>
     <style>
-        <?php include "../../css/adminOutline.css"; ?><?php include "../../css/adminForm.css"; ?>
+        <?php include "../../css/adminOutline.css";
+        include "../../css/adminForm.css"; ?>
     </style>
 </head>
 
@@ -71,7 +72,7 @@ $row = updateGet($conn);
     </nav>
 
     <div class="body">
-        <form action="../../includes/updateUser.inc.php" name=myform method="post">
+        <form action="../../includes/updateUser.inc.php" method="post">
             <table>
                 <tr>
                     <td><label>User Id</label></td>
@@ -87,7 +88,7 @@ $row = updateGet($conn);
                 </tr>
                 <tr>
                     <td><label>Phone no</label></td>
-                    <td><input type="text" name="userPhone" id="userPhone" placeholder="Phone no" value="<?php echo $row['userPhone']; ?>"></td>
+                    <td><input type="tel" name="userPhone" id="userPhone" placeholder="Phone no" value="<?php echo $row['userPhone']; ?>"></td>
                 </tr>
                 <tr>
                     <td colspan="2"><button type="submit" name="submit">UPDATE</button></td>

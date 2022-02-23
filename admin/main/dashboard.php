@@ -6,7 +6,8 @@
 <head>
     <title>Admin | Dashboard</title>
     <style>
-        <?php include "../../css/adminOutline.css"; ?><?php include "../../css/adminDashboard.css"; ?>
+        <?php include "../../css/adminOutline.css";
+        include "../../css/adminDashboard.css"; ?>
     </style>
 </head>
 

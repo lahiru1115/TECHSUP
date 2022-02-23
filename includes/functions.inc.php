@@ -10,6 +10,7 @@ function emptyInputAdminRegister($name, $email, $pwd, $repwd)
     return $result;
 }
 
+// Done
 function invaliduName($name)
 {
     if (!preg_match("/^[a-zA-Z0-9]*$/", $name)) {
@@ -30,6 +31,7 @@ function invalidPwd($pwd)
     return $result;
 }
 
+// Done
 function invalidEmail($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -159,13 +161,13 @@ function deleteIssue($conn)
 
 
 
-
-function unameExists($conn, $name, $email)
+// Done
+function uNameExists($conn, $name, $email)
 {
-    $sql = "SELECT * FROM users WHERE usersName = ? OR usersEmail = ?;";
+    $sql = "SELECT * FROM user WHERE userName = ? OR userEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../register/register.php?error=stmtfailed");
+        header("location: ../user/register.php?error=stmtfailed");
         exit();
     }
 
@@ -184,9 +186,10 @@ function unameExists($conn, $name, $email)
     mysqli_stmt_close($stmt);
 }
 
-function emptyInputSinup($name, $email, $phone, $pwd, $repwd)
+// Done
+function emptyInputSignup($name, $email, $pNumber, $pwd, $repwd)
 {
-    if (empty($name) || empty($email) || empty($phone) || empty($pwd) || empty($repwd)) {
+    if (empty($name) || empty($email) || empty($pNumber) || empty($pwd) || empty($repwd)) {
         $result = true;
     } else {
         $result = false;
@@ -194,24 +197,27 @@ function emptyInputSinup($name, $email, $phone, $pwd, $repwd)
     return $result;
 }
 
-function createUser($conn, $name, $email, $phone, $pwd)
+// Done
+function createUser($conn, $name, $email, $pNumber, $pwd)
 {
-    $sql = "INSERT INTO users (usersName, usersEmail, usersPhone, usersPwd) VALUES (?, ?, ?, ?);";
+    $sql = "INSERT INTO user (userName, userEmail, userPhone, userPwd) VALUES (?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
+
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../register/register.php?error=stmtfailed");
+        header("location: ../user/register.php?error=stmtfailed");
         exit();
     }
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $phone, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $pNumber, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../register/register.php?error=none");
+    header("location: ../user/register.php?error=none");
     exit();
 }
 
+// Done
 function emptyInputLogin($name, $pwd)
 {
     if (empty($name)  || empty($pwd)) {
@@ -222,26 +228,28 @@ function emptyInputLogin($name, $pwd)
     return $result;
 }
 
+
+// Done
 function loginUser($conn, $name, $pwd)
 {
-    $unameExists = unameExists($conn, $name, $name);
+    $uNameExists = uNameExists($conn, $name, $name);
 
-    if ($unameExists === false) {
-        header("location:../login/login.php?error=invalidlogin");
+    if ($uNameExists === false) {
+        header("location: ../user/login.php?error=invalidlogin");
         exit();
     }
 
-    $pwdHashed = $unameExists["usersPwd"];
+    $pwdHashed = $uNameExists["userPwd"];
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-        header("location:../login/login.php?error=wrongpassword");
+        header("location: ../user/login.php?error=wrongpassword");
         exit();
     } else if ($checkPwd === true) {
         session_start();
-        $_SESSION["usersId"] = $unameExists["usersId"];
-        $_SESSION["usersName"] = $unameExists["usersName"];
-        header("location:../index.php");
+        $_SESSION["userId"] = $uNameExists["userId"];
+        $_SESSION["userName"] = $uNameExists["userName"];
+        header("location: ../index.php");
         exit();
     }
 }

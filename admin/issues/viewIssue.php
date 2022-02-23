@@ -11,7 +11,8 @@ require_once('../../includes/functions.inc.php');
 <head>
     <title>Admin | Issues</title>
     <style>
-        <?php include "../../css/adminOutline.css"; ?><?php include "../../css/adminTable.css"; ?>
+        <?php include "../../css/adminOutline.css";
+        include "../../css/adminTable.css"; ?>
     </style>
 </head>
 

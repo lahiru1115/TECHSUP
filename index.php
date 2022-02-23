@@ -23,7 +23,7 @@ session_start();
         echo "<li><a href='./profile/profile.php'>Log out</a></li>";
         echo "<li><a href='./includes/logout.inc.php'>Profile</a></li>";
       } else {
-        echo "<li><a href='./login/login.php'>Login</a></li>";
+        echo "<li><a href='./user/login.php'>Login</a></li>";
         echo "<li><a href='./register/register.php'>Register</a></li>";
       }
       ?>
@@ -37,8 +37,8 @@ session_start();
   </nav>
   <div class="main">
     <?php
-    if (isset($_SESSION["usersId"])) {
-      echo "<h1>Hello " . $_SESSION["usersName"] . "!</h1>";
+    if (isset($_SESSION["userId"])) {
+      echo "<h1>Hello " . $_SESSION["userName"] . "!</h1>";
     } else {
       echo "<h1>Hello User!</h1>";
     }

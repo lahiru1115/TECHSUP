@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
         header("location: ../admin/main/register.php?error=emptyinput");
         exit();
     }
-    
+
     if (invaliduName($name) !== false) {
         header("location: ../admin/main/register.php?error=invaliduname");
         exit();
@@ -38,9 +38,9 @@ if (isset($_POST["submit"])) {
     if (adminuNameExists($conn, $name, $email) !== false) {
         header("location: ../admin/main/register.php?error=unametaken");
         exit();
+    } else {
+        createAdmin($conn, $name, $email, $pwd);
     }
-
-    createAdmin($conn, $name, $email, $pwd);
 } else {
     header("location: ../admin/main/register.php");
     exit();
