@@ -1,0 +1,55 @@
+.disabled {
+  pointer-events: none;
+}
+
+table,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px 5px;
+}
+
+th {
+  background-color: #6fb98f;
+  color: black;
+  white-space: nowrap;
+}
+
+td {
+  color: white;
+}
+
+.body {
+  margin-bottom: 50px;
+}
+
+.body img {
+  padding: 2px;
+  display: block;
+  margin: auto;
+  border: 1px solid transparent;
+}
+
+.body img:hover {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: 0.5s;
+}
+
+.warning {
+  color: red;
+}
+
+.success {
+  color: lightgreen;
+}

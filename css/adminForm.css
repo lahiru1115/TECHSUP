@@ -1,0 +1,63 @@
+.disabled {
+  pointer-events: none;
+}
+
+td {
+  padding: 10px 30px 10px 0px;
+}
+
+label {
+  color: white;
+}
+
+input {
+  width: 300px;
+  height: 36px;
+  padding-left: 10px;
+  color: white;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+}
+
+input:hover {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
+}
+
+input:focus {
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+button {
+  width: 150px;
+  height: 36px;
+  margin-top: 10px;
+  border: none;
+  background: #004445;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border-radius: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #6fb98f;
+  color: black;
+  transition: 0.5s;
+}
+
+.warning {
+  color: red;
+}
+
+.success {
+  color: lightgreen;
+}
