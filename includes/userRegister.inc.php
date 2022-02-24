@@ -12,38 +12,38 @@ $repwd = $_POST["repwd"];
 if (isset($_POST["submit"])) {
 
     if (emptyInputSignup($name, $email, $pNumber, $pwd, $repwd) !== false) {
-        header("location: ../user/register.php?error=emptyinput");
+        header("location: ../user/main/register.php?error=emptyinput");
         exit();
     }
 
     if (invaliduName($name) !== false) {
-        header("location: ../user/register.php?error=invaliduname");
+        header("location: ../user/main/register.php?error=invaliduname");
         exit();
     }
 
     if (invalidEmail($email) !== false) {
-        header("location: ../user/register.php?error=invalidemail");
+        header("location: ../user/main/register.php?error=invalidemail");
         exit();
     }
 
     if (invalidPwd($pwd) == false) {
-        header("location: ../user/register.php?error=invalidpwd");
+        header("location: ../user/main/register.php?error=invalidpwd");
         exit();
     }
 
     if (pwdMatch($pwd, $repwd) !== false) {
-        header("location: ../user/register.php?error=pwddontmatch");
+        header("location: ../user/main/register.php?error=pwddontmatch");
         exit();
     }
 
     if (unameExists($conn, $name, $email) !== false) {
-        header("location: ../user/register.php?error=unametaken");
+        header("location: ../user/main/register.php?error=unametaken");
         exit();
     } else {
         createUser($conn, $name, $email, $pNumber, $pwd);
     }
 } else {
-    header("location: ../user/register.php");
+    header("location: ../user/main/register.php");
     exit();
 }
 

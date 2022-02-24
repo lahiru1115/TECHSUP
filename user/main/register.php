@@ -4,7 +4,7 @@
 <head>
     <title>User | Register</title>
     <style>
-        <?php include "../css/userLoginReg.css"; ?>
+        <?php include "../../css/userLoginReg.css"; ?>
     </style>
 </head>
 
@@ -14,15 +14,15 @@
 
     <nav class="nav-v">
         <div class="logo">
-            <a href="../index.php">
-                <img src="../assets/techsup-logo-white.png" width="225px">
+            <a href="../../index.php">
+                <img src="../../assets/techsup-logo-white.png" width="225px">
             </a>
         </div>
     </nav>
 
     <div class="user userReg">
         <h1>Create new user account</h1><br>
-        <form action="../includes/userRegister.inc.php" method="post">
+        <form action="../../includes/userRegister.inc.php" method="post">
             <label>Username</label>
             <input type="text" placeholder="Enter your username" name="name" id="name">
             <label>Email</label>

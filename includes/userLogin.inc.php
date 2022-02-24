@@ -9,7 +9,7 @@ $pwd = $_POST["pwd"];
 if (isset($_POST["submit"])) {
 
     if (emptyInputLogin($name, $pwd) !== false) {
-        header("location: ../user/login.php?error=emptyinput");
+        header("location: ../user/main/login.php?error=emptyinput");
         exit();
     }
     if ($name == "admin@2") {
@@ -18,6 +18,6 @@ if (isset($_POST["submit"])) {
         loginUser($conn, $name, $pwd);
     }
 } else {
-    header("location: ../user/login.php");
+    header("location: ../user/main/login.php");
     exit();
 }

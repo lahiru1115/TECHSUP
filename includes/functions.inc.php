@@ -167,7 +167,7 @@ function uNameExists($conn, $name, $email)
     $sql = "SELECT * FROM user WHERE userName = ? OR userEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../user/register.php?error=stmtfailed");
+        header("location: ../user/main/register.php?error=stmtfailed");
         exit();
     }
 
@@ -204,16 +204,16 @@ function createUser($conn, $name, $email, $pNumber, $pwd)
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../user/register.php?error=stmtfailed");
+        header("location: ../user/main/register.php?error=stmtfailed");
         exit();
     }
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $pNumber, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "sss", $name, $email, $pNumber, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../user/register.php?error=none");
+    header("location: ../user/main/register.php?error=none");
     exit();
 }
 
@@ -235,7 +235,7 @@ function loginUser($conn, $name, $pwd)
     $uNameExists = uNameExists($conn, $name, $name);
 
     if ($uNameExists === false) {
-        header("location: ../user/login.php?error=invalidlogin");
+        header("location: ../user/main/login.php?error=invalidlogin");
         exit();
     }
 
@@ -243,13 +243,13 @@ function loginUser($conn, $name, $pwd)
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-        header("location: ../user/login.php?error=wrongpassword");
+        header("location: ../user/main/login.php?error=wrongpassword");
         exit();
     } else if ($checkPwd === true) {
         session_start();
         $_SESSION["userId"] = $uNameExists["userId"];
         $_SESSION["userName"] = $uNameExists["userName"];
-        header("location: ../index.php");
+        header("location: ../user/main/dashboard.php");
         exit();
     }
 }
@@ -279,6 +279,7 @@ function loginAdmin($conn, $name, $pwd)
     }
 }
 
+// Done
 function emptyInputSupport($title, $des)
 {
     if (empty($title)  || empty($des)) {
@@ -289,19 +290,20 @@ function emptyInputSupport($title, $des)
     return $result;
 }
 
-function submitIssue($conn, $usersId, $title, $des, $status)
+// Done
+function submitIssue($conn, $userId, $title, $description, $status)
 {
-    $sql = "INSERT INTO issues (usersId ,title, description, status) VALUES (?, ?, ?, ?);";
+    $sql = "INSERT INTO issue (userId ,title, description, status) VALUES (?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../support/supportticket.php?error=stmtfailed");
+        header("location: ../user/issues/addIssue.php?error=stmtfailed");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ssss", $usersId, $title, $des, $status);
+    mysqli_stmt_bind_param($stmt, "sssi", $userId, $title, $description, $status);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../support/supportticket.php?error=none");
+    header("location: ../user/issues/addIssue.php?error=none");
     exit();
 }
 
@@ -412,15 +414,16 @@ function updateIssueData($conn, $issueId, $status)
     }
 }
 
-function yourIssues($conn, $usersId)
+// Done
+function yourIssues($conn, $userId)
 {
-    $sql = "SELECT issuesId, title, description, status FROM issues WHERE usersId='$usersId'ORDER BY issuesId DESC;";
+    $sql = "SELECT issueId, title, description, status FROM issue WHERE userId='$userId' ORDER BY issueId DESC;";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         return $result;
     } else {
-        header("location:../support/supportticketfirst.php");
+        header("location: ../user/issues/viewIssue.php");
         exit();
     }
 }
@@ -460,19 +463,20 @@ function deleteAccount($conn)
     }
 }
 
+// Done
 function deleteIssueUser($conn)
 {
-    if (isset($_GET['issuesId']) && is_numeric($_GET['issuesId'])) {
-        $issuesId = $_GET['issuesId'];
-        $sql = "DELETE FROM issues WHERE issuesId='$issuesId';";
+    if (isset($_GET['issueId']) && is_numeric($_GET['issueId'])) {
+        $issueId = $_GET['issueId'];
+        $sql = "DELETE FROM issue WHERE issueId='$issueId';";
 
         $delete_issue = mysqli_query($conn, $sql);
 
         if ($delete_issue) {
-            header("location:../support/supportticket.php?error=deleted");
+            header("location: ../issues/viewIssue.php?error=deleted");
             exit();
         } else {
-            header("location:../support/supportticket.php?error=cantdelete");
+            header("location: ../issues/viewIssue.php?error=cantdelete");
             exit();
         }
     }

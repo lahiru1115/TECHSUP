@@ -23,7 +23,7 @@ session_start();
         echo "<li><a href='./profile/profile.php'>Log out</a></li>";
         echo "<li><a href='./includes/logout.inc.php'>Profile</a></li>";
       } else {
-        echo "<li><a href='./user/login.php'>Login</a></li>";
+        echo "<li><a href='./user/main/login.php'>Login</a></li>";
         echo "<li><a href='./register/register.php'>Register</a></li>";
       }
       ?>

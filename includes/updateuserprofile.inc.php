@@ -1,42 +1,39 @@
 <?php
 
-  if(isset($_POST["submit"])){
+require_once 'dbh.inc.php';
+require_once 'functions.inc.php';
 
-    $usersId = $_POST["uid"];
-    $name = $_POST["uname"];
-    $email = $_POST["email"];
-    $phone = $_POST["pnumber"];
-    $pwd = $_POST["psw"];
-    $repwd = $_POST["repsw"];
+$userId = $_POST["userId"];
+$userName = $_POST["userName"];
+$userEmail = $_POST["userEmail"];
+$userPhone = $_POST["userPhone"];
+$pwd = $_POST["pwd"];
+$repwd = $_POST["repwd"];
 
-    require_once 'dbh.inc.php';
-    require_once 'functions.inc.php';
+if (isset($_POST["submit"])) {
 
-    if(emptyInputSinup($name,$email,$phone,$pwd,$repwd) !== false){
-      header("location: ../profile/profile.php?error=emptyinput");
-      exit();
+    if (emptyInputSignup($userName, $userEmail, $userPhone, $pwd, $repwd) !== false) {
+        header("location: ../user/profile/profile.php?error=emptyinput");
+        exit();
     }
 
-    if(invaliduName($name) !== false){
-      header("location: ../profile/profile.php?error=invaliduname");
-      exit();
+    if (invaliduName($userName) !== false) {
+        header("location: ../profile/profile.php?error=invaliduname");
+        exit();
     }
 
-    if(invalidEmail($email) !== false){
-      header("location: ../profile/profile.php?error=invalidemail");
-      exit();
+    if (invalidEmail($userEmail) !== false) {
+        header("location: ../profile/profile.php?error=invalidemail");
+        exit();
     }
 
-    if(pwdMatch($pwd,$repwd) !== false){
-      header("location: ../profile/profile.php?error=pwddontmatch");
-      exit();
+    if (pwdMatch($pwd, $repwd) !== false) {
+        header("location: ../profile/profile.php?error=pwddontmatch");
+        exit();
     }
 
-    updateUserDataProfile($conn, $usersId, $name, $email, $phone,  $pwd);
-
-
-  }
-  else {
+    updateUserDataProfile($conn, $usersId, $userName, $userEmail, $userPhone,  $pwd);
+} else {
     header("location: ../profile/profile.php");
     exit();
-  }
+}
