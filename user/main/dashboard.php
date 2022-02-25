@@ -49,7 +49,11 @@
                     </div>
                 </a>
                 <br>
-                <a href="../profile/updateUser.php">
+                <a href="../profile/updateUser.php?userId=<?php
+                                                            if (isset($_SESSION["userId"])) {
+                                                                echo $_SESSION["userId"];
+                                                            }
+                                                            ?>">
                     <div class="item click">
                         <img src="../../assets/manageAccounts-outline-white-24dp">
                         <span>Settings</span>

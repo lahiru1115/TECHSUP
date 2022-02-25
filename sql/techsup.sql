@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 23, 2022 at 07:23 PM
+-- Generation Time: Feb 25, 2022 at 07:42 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `issue` (
   `status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`issueId`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `issue`
@@ -76,7 +76,13 @@ INSERT INTO `issue` (`issueId`, `userId`, `title`, `description`, `status`) VALU
 (15, 1, 'fgdfgdfg', 'hghfghdfghfghdfghfghfgh', 0),
 (17, 1, 'fgdfgdfg', 'hghfghdfghfghdfghfghfgh', 0),
 (20, 1, 'fgdfgdfg', 'hghfghdfghfghdfghfghfgh', 0),
-(22, 1, 'fgdfgdfg', 'hghfghdfghfghdfghfghfgh', 0);
+(22, 1, 'fgdfgdfg', 'hghfghdfghfghdfghfghfgh', 0),
+(28, 6, 'weqweq', 'qweqweqwe', 0),
+(29, 6, 'piopiopi', 'opiopiop', 0),
+(30, 6, 'dasfsdfas', 'asdasdasda', 0),
+(31, 6, 'xcvzxcvcvz', 'zxcvzxvcvxcvxcv', 0),
+(32, 6, 'ljkhkljkl', 'kjhlhjkjkl', 0),
+(33, 6, 'nmvbnmbnm', 'bnmvnmbnm', 0);
 
 -- --------------------------------------------------------
 
@@ -91,7 +97,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `userEmail` varchar(50) NOT NULL,
   `userPhone` varchar(20) NOT NULL,
   `userPwd` varchar(100) NOT NULL,
-  PRIMARY KEY (`userId`)
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `userName` (`userName`),
+  UNIQUE KEY `userEmail` (`userEmail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
@@ -101,7 +109,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`userId`, `userName`, `userEmail`, `userPhone`, `userPwd`) VALUES
 (1, 'lahiru', 'lahirudissanayake15@gmail.com', '765424752', '$2y$10$6VuPpqP8tg0oTWZRu5c/SegAqml3N558tl82.tAwgXfDvfKq1Q7xy'),
 (3, 'fggdfgdg', 'lahirudissanayake1556456@gmail.com', '6456456', '1234'),
-(4, 'fggdfgdg', 'lahirudissanayake1556456@gmail.com', '6456456', '1234'),
 (5, 'asd', 'asd@gmail.com', '123', '1234'),
 (6, 'ucsc', 'ucsc@techsup.com', '011-1234567', '$2y$10$SEULGQv6sX81wFtxoNiQ9eq3kuy1DvNIFqSpjeBo7ii5HeKSr7XI.');
 

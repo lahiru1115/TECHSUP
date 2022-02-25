@@ -44,6 +44,14 @@ select {
   border-radius: 5px;
 }
 
+option {
+  color: black;
+}
+
+option:disabled {
+  color: grey;
+}
+
 input:hover,
 textarea:hover,
 select:hover {
