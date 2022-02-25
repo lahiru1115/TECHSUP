@@ -1,5 +1,6 @@
 <?php
 
+// Done
 function emptyInputAdminRegister($name, $email, $pwd, $repwd)
 {
     if (empty($name) || empty($email) || empty($pwd) || empty($repwd)) {
@@ -21,6 +22,7 @@ function invaliduName($name)
     return $result;
 }
 
+// Done
 function invalidPwd($pwd)
 {
     if (strlen($pwd) >= 4) {
@@ -42,6 +44,7 @@ function invalidEmail($email)
     return $result;
 }
 
+// Done
 function pwdMatch($pwd, $repwd)
 {
     if ($pwd !== $repwd) {
@@ -52,6 +55,7 @@ function pwdMatch($pwd, $repwd)
     return $result;
 }
 
+// Done
 function adminuNameExists($conn, $name, $email)
 {
     $sql = "SELECT * FROM admin WHERE adminName = ? OR adminEmail = ?;";
@@ -76,6 +80,7 @@ function adminuNameExists($conn, $name, $email)
     mysqli_stmt_close($stmt);
 }
 
+// Done
 function createAdmin($conn, $name, $email, $pwd)
 {
     $sql = "INSERT INTO admin (adminName, adminEmail, adminPwd) VALUES (?, ?, ?);";
@@ -94,6 +99,7 @@ function createAdmin($conn, $name, $email, $pwd)
     exit();
 }
 
+// Done
 function emptyInputAdminLogin($name, $pwd)
 {
     if (empty($name)  || empty($pwd)) {
@@ -104,6 +110,7 @@ function emptyInputAdminLogin($name, $pwd)
     return $result;
 }
 
+// Done
 function getIssueData($conn)
 {
     $sql = "SELECT user.*, issue.*, IF(status, 'Solved', 'Pending') status FROM issue, user WHERE issue.userId = user.userId;";
@@ -117,6 +124,7 @@ function getIssueData($conn)
     }
 }
 
+// Done
 function getUserData($conn)
 {
     $sql = "SELECT userId, userName, userEmail, userPhone FROM user";
@@ -130,6 +138,7 @@ function getUserData($conn)
     }
 }
 
+// Done
 function deleteIssue($conn)
 {
     if (isset($_GET['issueId']) && is_numeric($_GET['issueId'])) {
@@ -147,19 +156,6 @@ function deleteIssue($conn)
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Done
 function uNameExists($conn, $name, $email)
