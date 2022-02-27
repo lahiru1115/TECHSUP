@@ -224,7 +224,6 @@ function emptyInputLogin($name, $pwd)
     return $result;
 }
 
-
 // Done
 function loginUser($conn, $name, $pwd)
 {
@@ -349,7 +348,9 @@ function emptyInputUpdate($name, $email, $phone)
 // NOT WORKING ******************************************************************************************************************************************************
 function updateUserData($conn, $userId, $userName, $userEmail, $userPhone)
 {
-    $sql = "UPDATE user SET userName='$userName', userEmail='$userEmail', userPhone='$userPhone' WHERE userId='$userId';";
+    // $sql = "UPDATE user SET userName='$userName', userEmail='$userEmail', userPhone='$userPhone' WHERE userId='$userId';";
+    $sql = "UPDATE user set userName='" . $_POST['userName'] . "', userEmail='" . $_POST['userEmail'] . "', userPhone='" . $_POST['userPhone'] . "' WHERE userId='" . $_POST['userId'] . "'";
+
     $update_query = mysqli_query($conn, $sql);
 
     if ($update_query) {
@@ -398,7 +399,7 @@ function issueGet($conn)
 // NOT WORKING ******************************************************************************************************************************************************
 function updateIssueData($conn, $issueId, $status)
 {
-    $sql = "UPDATE issue SET status='$status' WHERE issueId='$issueId';";
+    $sql = "UPDATE issue SET status=" . $status . " WHERE issueId='$issueId';";
     $update_query = mysqli_query($conn, $sql);
 
     if ($update_query) {

@@ -11,7 +11,7 @@
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
 
-    if(emptyInputSinup($name,$email,$phone,$pwd,$repwd) !== false){
+    if(emptyInputSignup($name,$email,$phone,$pwd,$repwd) !== false){
       header("location: ../admin/panel/adduser.php?error=emptyinput");
       exit();
     }
@@ -37,7 +37,6 @@
     }
 
     addUser($conn, $name, $email, $phone, $pwd);
-
 
   }
   else {

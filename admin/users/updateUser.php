@@ -76,7 +76,7 @@ $row = updateGet($conn);
             <table>
                 <tr>
                     <td><label>User Id</label></td>
-                    <td><input type="text" name="userId" id="userId" placeholder="User Id" value="<?php echo $row['userId']; ?>" disabled></td>
+                    <td><input type="text" name="userId" id="userId" placeholder="User Id" value="<?php echo $row['userId']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>User Name</label></td>

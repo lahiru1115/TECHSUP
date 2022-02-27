@@ -17,7 +17,6 @@ require_once('../../includes/functions.inc.php');
 </head>
 
 <body>
-
     <nav class="nav-h">
         <div class="heading">
             <h1>Issue Management</h1>

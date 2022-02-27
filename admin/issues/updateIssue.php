@@ -84,7 +84,7 @@ $row = issueGet($conn);
                 </tr>
                 <tr>
                     <td><label>Issue Id</label></td>
-                    <td><input type="text" name="issueId" id="issueId" placeholder="Issue Id" value="<?php echo $row['issueId']; ?>" disabled></td>
+                    <td><input type="text" name="issueId" id="issueId" placeholder="Issue Id" value="<?php echo $row['issueId']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>Title</label></td>
@@ -97,8 +97,8 @@ $row = issueGet($conn);
                 <tr>
                     <td><label>Status</label></td>
                     <td><select name="status" id="status">
-                            <option value=false <?php if ($row['status'] == "Pending") echo 'selected="selected"'; ?>>Pending</option>
-                            <option value=true <?php if ($row['status'] == "Solved") echo 'selected="selected"'; ?>>Solved</option>
+                            <option value=0 <?php if ($row['status'] == "Pending") echo 'selected="selected"'; ?>>Pending</option>
+                            <option value=1 <?php if ($row['status'] == "Solved") echo 'selected="selected"'; ?>>Solved</option>
                         </select>
                     </td>
                 </tr>
