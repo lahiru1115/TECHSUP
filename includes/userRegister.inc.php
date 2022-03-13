@@ -39,6 +39,7 @@ if (isset($_POST["submit"])) {
     if (unameExists($conn, $name, $email) !== false) {
         header("location: ../user/main/register.php?error=unametaken");
         exit();
+        
     } else {
         createUser($conn, $name, $email, $pNumber, $pwd);
     }
@@ -46,9 +47,3 @@ if (isset($_POST["submit"])) {
     header("location: ../user/main/register.php");
     exit();
 }
-
-
-
-// if ($name == "admin@2") {
-//     createAdmin($conn, $name, $email, $pwd);
-// }

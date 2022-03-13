@@ -118,7 +118,7 @@ require_once('../../includes/functions.inc.php');
             } else if ($_GET["error"] == "none") {
                 echo "<p class=\"success\">User details Updated!</p>";
             } else if ($_GET["error"] == "deleted") {
-                echo "<p class=\"success\">User details Deleted!</p>";
+                echo "<p class=\"success\">User account Deleted!</p>";
             }
         }
         ?>

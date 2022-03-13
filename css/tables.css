@@ -28,6 +28,10 @@ td {
   color: white;
 }
 
+.thLeft {
+  text-align: left;
+}
+
 .body {
   margin-bottom: 50px;
 }
@@ -52,4 +56,9 @@ td {
 
 .success {
   color: lightgreen;
+}
+
+.success2 {
+  color: lightgreen;
+  margin-top: 0px;
 }

@@ -1,13 +1,19 @@
 <?php session_start(); ?>
 
+<?php
+require_once('../../includes/dbh.inc.php');
+require_once('../../includes/functions.inc.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>User | Dashboard</title>
     <style>
-        <?php include "../../css/adminOutline.css";
-        include "../../css/adminDashboard.css"; ?>
+        <?php include "../../css/outline.css";
+        include "../../css/dashboard.css";
+        include "../../css/tables.css"; ?>
     </style>
 </head>
 
@@ -59,7 +65,7 @@
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logoutUser.inc.php">
+            <a href="../../includes/logout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -69,7 +75,40 @@
     </nav>
 
     <div class="body">
-        <p>Test</p>
+        <h2>Pending Issues</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="thLeft">Issue Id</th>
+                    <th class="thLeft">Title</th>
+                    <th class="thLeft">Description</th>
+                    <th class="thLeft">Date & Time</th>
+                    <th class="thLeft">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $userId = $_SESSION['userId'];
+                $result = userPendingIssues($conn, $userId);
+                if ($result) {
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <tr>
+                            <td><?php echo $row['issueId']; ?></td>
+                            <td><?php echo $row['title']; ?></td>
+                            <td><?php echo $row['description']; ?></td>
+                            <td><?php echo $row['timestamp']; ?></td>
+                            <td><?php echo $row['status']; ?></td>
+                        </tr>
+                <?php
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+        <div class="seeMore">
+
+        </div>
+        <a href="../issues/viewIssue.php">See more...</a>
     </div>
 
 </body>

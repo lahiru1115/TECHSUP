@@ -12,28 +12,28 @@ $repwd = $_POST["repwd"];
 
 if (isset($_POST["submit"])) {
 
-    if (emptyInputSignup($userName, $userEmail, $userPhone, $pwd, $repwd) !== false) {
-        header("location: ../user/profile/profile.php?error=emptyinput");
-        exit();
-    }
+    // if (emptyInputSignup($userName, $userEmail, $userPhone, $pwd, $repwd) !== false) {
+    //     header("location: ../user/profile/updateUser.php?error=emptyinput");
+    //     exit();
+    // }
 
     if (invaliduName($userName) !== false) {
-        header("location: ../profile/profile.php?error=invaliduname");
+        header("location: ../profile/updateUser.php?error=invaliduname");
         exit();
     }
 
     if (invalidEmail($userEmail) !== false) {
-        header("location: ../profile/profile.php?error=invalidemail");
+        header("location: ../profile/updateUser.php?error=invalidemail");
         exit();
     }
 
     if (pwdMatch($pwd, $repwd) !== false) {
-        header("location: ../profile/profile.php?error=pwddontmatch");
+        header("location: ../profile/updateUser.php?error=pwddontmatch");
         exit();
     }
 
-    updateUserDataProfile($conn, $usersId, $userName, $userEmail, $userPhone,  $pwd);
+    updateUserDataProfile($conn, $userId, $userName, $userEmail, $userPhone, $pwd);
 } else {
-    header("location: ../profile/profile.php");
+    header("location: ../profile/updateUser.php");
     exit();
 }

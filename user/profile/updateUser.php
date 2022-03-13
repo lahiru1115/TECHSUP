@@ -10,10 +10,10 @@ $row = updateGet($conn);
 <html lang="en">
 
 <head>
-    <title>User | Edit User</title>
+    <title>User | Update User</title>
     <style>
-        <?php include "../../css/adminOutline.css";
-        include "../../css/adminForm.css"; ?>
+        <?php include "../../css/outline.css";
+        include "../../css/forms.css"; ?>
     </style>
 </head>
 
@@ -21,7 +21,7 @@ $row = updateGet($conn);
 
     <nav class="nav-h">
         <div class="heading">
-            <h1>Edit User</h1>
+            <h1>Update User</h1>
         </div>
     </nav>
 
@@ -62,7 +62,7 @@ $row = updateGet($conn);
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logoutUser.inc.php">
+            <a href="../../includes/logout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -76,19 +76,19 @@ $row = updateGet($conn);
             <table>
                 <tr>
                     <td><label>User Id</label></td>
-                    <td><input type="text" name="userId" id="userId" placeholder="User Id" value="<?php echo $row['userId']; ?>" disabled></td>
+                    <td><input type="text" name="userId" id="userId" placeholder="User Id" value="<?php echo $row['userId']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>User Name</label></td>
-                    <td><input type="text" name="userName" id="userName" placeholder="User Name" value="<?php echo $row['userName']; ?>"></td>
+                    <td><input type="text" name="userName" id="userName" placeholder="User Name" value="<?php echo $row['userName']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>Email</label></td>
-                    <td><input type="email" name="userEmail" id="userEmail" placeholder="Email" value="<?php echo $row['userEmail']; ?>"></td>
+                    <td><input type="email" name="userEmail" id="userEmail" placeholder="Email" value="<?php echo $row['userEmail']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>Phone no</label></td>
-                    <td><input type="tel" name="userPhone" id="userPhone" placeholder="Phone no" value="<?php echo $row['userPhone']; ?>"></td>
+                    <td><input type="tel" name="userPhone" id="userPhone" placeholder="Phone no" value="<?php echo $row['userPhone']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>Password</label></td>
@@ -103,16 +103,30 @@ $row = updateGet($conn);
                 </tr>
             </table>
         </form>
+        <div class="del">
+            <a href="deleteUser.php?userId=<?php echo $row['userId']; ?>" onclick="return confirm('Are you sure you want to delete your account?')"><button>Delete the Account</button></a>
+        </div>
+        <?php
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "invaliduname") {
+                echo "<p class=\"warning\">Invalid Username!</p>";
+            } else if ($_GET["error"] == "invalidemail") {
+                echo "<p class=\"warning\">Invalid Email!</p>";
+            } else if ($_GET["error"] == "cantupdate") {
+                echo "<p class=\"warning\">Can't update the user at the moment!</p>";
+            } else if ($_GET["error"] == "cantdelete") {
+                echo "<p class=\"warning\">Can't delete the user at the moment!</p>";
+            } else if ($_GET["error"] == "notworking") {
+                echo "<p class=\"success\">There are no users available!</p>";
+            } else if ($_GET["error"] == "none") {
+                echo "<p class=\"success\">User details Updated!</p>";
+            } else if ($_GET["error"] == "deleted") {
+                echo "<p class=\"success\">User account Deleted!</p>";
+            }
+        }
+        ?>
     </div>
 
 </body>
 
 </html>
-
-
-
-<!-- <body>
-    <div class="del">
-        <button><a href="deleteuser.php?usersId=<?php echo $row['usersId']; ?>" onclick="return confirm('Are you sure you want to delete your account?')">Delete the Account</a></button>
-    </div>
-</body> -->

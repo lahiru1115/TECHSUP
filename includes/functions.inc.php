@@ -197,6 +197,7 @@ function emptyInputSignup($name, $email, $pNumber, $pwd, $repwd)
 function createUser($conn, $name, $email, $pNumber, $pwd)
 {
     $sql = "INSERT INTO user (userName, userEmail, userPhone, userPwd) VALUES (?, ?, ?, ?);";
+
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -206,7 +207,7 @@ function createUser($conn, $name, $email, $pNumber, $pwd)
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "sss", $name, $email, $pNumber, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $pNumber, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../user/main/register.php?error=none");
@@ -288,7 +289,7 @@ function emptyInputSupport($title, $des)
 // Done
 function submitIssue($conn, $userId, $title, $description, $status)
 {
-    $sql = "INSERT INTO issue (userId ,title, description, status) VALUES (?, ?, ?, ?);";
+    $sql = "INSERT INTO issue (userId ,title, description, status, timestamp) VALUES (?, ?, ?, ?, now());";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../user/issues/addIssue.php?error=stmtfailed");
@@ -414,47 +415,67 @@ function updateIssueData($conn, $issueId, $status)
 // Done
 function yourIssues($conn, $userId)
 {
-    $sql = "SELECT issueId, title, description, status FROM issue WHERE userId='$userId' ORDER BY issueId DESC;";
+    $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' ORDER BY timestamp DESC;";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         return $result;
+        exit();
     } else {
-        header("location: ../user/issues/viewIssue.php");
+        // header("location: ../user/issues/viewIssue.php?error=notworking");
+        echo "<p class=\"success2\">There are no issues available!</p>";
         exit();
     }
 }
 
-function updateUserDataProfile($conn, $usersId, $name, $email, $phone,  $pwd)
+// Done
+function userPendingIssues($conn, $userId)
+{
+    $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' AND status=false ORDER BY timestamp DESC LIMIT 5;";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        return $result;
+        exit();
+    } else {
+        // header("location: ../user/issues/viewIssue.php?error=notworking");
+        echo "<p class=\"success2\">There are no issues available!</p>";
+        exit();
+    }
+}
+
+// Done
+function updateUserDataProfile($conn, $userId, $userName, $userEmail, $userPhone, $pwd)
 {
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-    $sql = "UPDATE users SET usersName='$name', usersEmail='$email', usersPhone='$phone', usersPwd='$hashedPwd' WHERE usersId='$usersId';";
+    $sql = "UPDATE user SET userName='$userName', userEmail='$userEmail', userPhone='$userPhone', userPwd='$hashedPwd' WHERE userId='$userId';";
     $update_query = mysqli_query($conn, $sql);
 
     if ($update_query) {
-        header("location:../profile/profile.php?error=none");
+        header("location: ../user/profile/updateUser.php?error=none");
         exit();
     } else {
-        header("location:../profile/profile.php?error=cantupdate");
+        header("location: ../user/profile/updateUser.php?error=cantupdate");
         exit();
     }
 }
 
+// Done
 function deleteAccount($conn)
 {
-    if (isset($_GET['usersId']) && is_numeric($_GET['usersId'])) {
-        $usersId = $_GET['usersId'];
-        $sql = "DELETE FROM users WHERE usersId='$usersId';";
+    if (isset($_GET['userId']) && is_numeric($_GET['userId'])) {
+        $userId = $_GET['userId'];
+        $sql = "DELETE FROM user WHERE userId='$userId';";
         $delete_user = mysqli_query($conn, $sql);
 
         if ($delete_user) {
             session_start();
             session_unset();
             session_destroy();
-            header("location:../login/login.php?error=deleted");
+            header("location: ../main/login.php?error=deleted");
             exit();
         } else {
-            header("location:../profile/profile.php?error=cantdelete");
+            header("location: updateUser.php?error=cantdelete");
             exit();
         }
     }

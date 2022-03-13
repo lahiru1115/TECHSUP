@@ -11,8 +11,8 @@ require_once('../../includes/functions.inc.php');
 <head>
     <title>User | Issues</title>
     <style>
-        <?php include "../../css/adminOutline.css";
-        include "../../css/adminTable.css"; ?>
+        <?php include "../../css/outline.css";
+        include "../../css/tables.css"; ?>
     </style>
 </head>
 
@@ -54,14 +54,17 @@ require_once('../../includes/functions.inc.php');
                     </div>
                 </a>
                 <br>
-                <a href="../profile/updateUser.php">
+                <?php
+                $userId = $_SESSION["userId"];
+                ?>
+                <a href="../profile/updateUser.php?userId=<?php echo $userId; ?>">
                     <div class="item click">
                         <img src="../../assets/manageAccounts-outline-white-24dp">
                         <span>Settings</span>
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logoutUser.inc.php">
+            <a href="../../includes/logout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -74,11 +77,11 @@ require_once('../../includes/functions.inc.php');
         <table>
             <thead>
                 <tr>
-                    <th>Issue Id</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>View</th>
+                    <th class="thLeft">Issue Id</th>
+                    <th class="thLeft">Title</th>
+                    <th class="thLeft">Description</th>
+                    <th class="thLeft">Date & Time</th>
+                    <th class="thLeft">Status</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -91,9 +94,9 @@ require_once('../../includes/functions.inc.php');
                         <tr>
                             <td><?php echo $row['issueId']; ?></td>
                             <td><?php echo $row['title']; ?></td>
-                            <td><?php echo substr($row['description'], 0); ?></td>
+                            <td><?php echo $row['description']; ?></td>
+                            <td><?php echo $row['timestamp']; ?></td>
                             <td><?php echo $row['status']; ?></td>
-                            <td><a href="viewDescr.php?issueId=<?php echo $row['issueId']; ?>"><img src="../../assets/description-outline-white-18dp.png"></a></td>
                             <td><a href="deleteIssue.php?issueId=<?php echo $row['issueId']; ?>" onclick="return confirm('Do you really want to delete this issue?')"><img src="../../assets/delete-outline-white-24dp.png"></a></td>
                         </tr>
                 <?php

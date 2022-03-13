@@ -11,8 +11,8 @@ require_once('../../includes/functions.inc.php');
 <head>
     <title>User | Add Issue</title>
     <style>
-        <?php include "../../css/adminOutline.css";
-        include "../../css/adminForm.css"; ?>
+        <?php include "../../css/outline.css";
+        include "../../css/forms.css"; ?>
     </style>
 </head>
 
@@ -54,14 +54,17 @@ require_once('../../includes/functions.inc.php');
                     </div>
                 </a>
                 <br>
-                <a href="../profile/updateUser.php">
+                <?php
+                $userId = $_SESSION["userId"];
+                ?>
+                <a href="../profile/updateUser.php?userId=<?php echo $userId; ?>">
                     <div class="item click">
                         <img src="../../assets/manageAccounts-outline-white-24dp">
                         <span>Settings</span>
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logoutUser.inc.php">
+            <a href="../../includes/logout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -81,7 +84,8 @@ require_once('../../includes/functions.inc.php');
                     <td><label>Describe your issue</label></td>
                     <td><textarea name="description" rows="10" cols="150" placeholder="Please describe your issue here"></textarea></td>
                 </tr>
-                <tr>
+                <!-- Hidden row -->
+                <tr style="display: none;">
                     <td><label>Status</label></td>
                     <td><select name="status" id="status">
                             <option value=false selected>Pending</option>
@@ -114,6 +118,3 @@ require_once('../../includes/functions.inc.php');
 </body>
 
 </html>
-
-<!-- <script src="alert.js"></script> -->
-<!-- onclick="alertmsg();" -->

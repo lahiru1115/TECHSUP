@@ -81,10 +81,7 @@ a:hover {
   font-size: 16px;
 }
 
-.user input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"] {
+.user input {
   border: none;
   outline: none;
   width: 100%;
@@ -94,6 +91,10 @@ input[type="tel"] {
   background: transparent;
   color: white;
   font-size: 16px;
+}
+
+.user input:focus::placeholder {
+  color: transparent;
 }
 
 .user button {

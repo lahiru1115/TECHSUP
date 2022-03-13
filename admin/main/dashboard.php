@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();
+echo session_id() ?>
 
 <!DOCTYPE html>
 <html lang="en">
