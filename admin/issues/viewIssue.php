@@ -11,12 +11,15 @@ require_once('../../includes/functions.inc.php');
 <head>
     <title>Admin | Issues</title>
     <style>
-        <?php include "../../css/adminOutline.css";
-        include "../../css/adminTable.css"; ?>
+        <?php include "../../css/dashboardOutline.css";
+        include "../../css/tables.css"; ?>
     </style>
 </head>
 
 <body>
+
+    <nav class="nav-h-back"></nav>
+
     <nav class="nav-h">
         <div class="heading">
             <h1>Issue Management</h1>
@@ -39,6 +42,13 @@ require_once('../../includes/functions.inc.php');
                 ?>
             </div>
             <div>
+                <a href="../main/dashboard.php">
+                    <div class="item click">
+                        <img src="../../assets//home-outline-white-24dp.png">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <br>
                 <a href="#" class="disabled">
                     <div class="item click">
                         <img src="../../assets/issue-outline-white-24dp.png">
@@ -73,32 +83,34 @@ require_once('../../includes/functions.inc.php');
         <table>
             <thead>
                 <tr>
-                    <th>Issue Id</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>User Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone no</th>
-                    <th>Status</th>
+                    <th class="thLeft">Issue Id</th>
+                    <th class="thLeft">User Name</th>
+                    <th class="thLeft">Title</th>
+                    <th class="thLeft descr">Description</th>
+                    <th class="thLeft">Date & Time</th>
+                    <th class="thLeft">Status</th>
+                    <th>More</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $result = getIssueData($conn);
+                $result = adminGetIssueDataView($conn);
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
                             <td><?php echo $row['issueId']; ?></td>
-                            <td><?php echo $row['title']; ?></td>
-                            <td><?php echo substr($row['description'], 0); ?></td>
-                            <td><?php echo $row['userId']; ?></td>
                             <td><?php echo $row['userName']; ?></td>
-                            <td><?php echo $row['userEmail']; ?></td>
-                            <td><?php echo $row['userPhone']; ?></td>
+                            <td><?php echo $row['title']; ?></td>
+                            <td><?php if (strlen($row['description']) > 100) {
+                                    echo substr($row['description'], 0, 100) . "...";
+                                } else {
+                                    echo $row['description'];
+                                } ?></td>
+                            <td><?php echo $row['timestamp']; ?></td>
                             <td><?php echo $row['status']; ?></td>
+                            <td><a href="viewAll.php?issueId=<?php echo $row['issueId']; ?>"><img src="../../assets/readMore-outline-white-24dp"></a></td>
                             <td><a href="updateIssue.php?issueId=<?php echo $row['issueId']; ?>"><img src="../../assets/edit-outline-white-24dp.png"></a></td>
                             <td><a href="deleteIssue.php?issueId=<?php echo $row['issueId']; ?>" onclick="return confirm('Do you really want to delete this record?')"><img src="../../assets/delete-outline-white-24dp.png"></a></td>
                         </tr>
@@ -110,17 +122,17 @@ require_once('../../includes/functions.inc.php');
         </table>
         <?php
         if (isset($_GET["error"])) {
-            if ($_GET["error"] == "emptyinput") {
+            if ($_GET["error"] == "emptyInput") {
                 echo "<p class=\"warning\">Fill in all the fields!</p>";
-            } else if ($_GET["error"] == "invaliduname") {
+            } else if ($_GET["error"] == "invaliduName") {
                 echo "<p class=\"warning\">Invalid Username!</p>";
-            } else if ($_GET["error"] == "invalidemail") {
+            } else if ($_GET["error"] == "invalidEmail") {
                 echo "<p class=\"warning\">Invalid Email!</p>";
-            } else if ($_GET["error"] == "cantupdate") {
+            } else if ($_GET["error"] == "cantUpdate") {
                 echo "<p class=\"warning\">Can't update the issue at the moment!</p>";
-            } else if ($_GET["error"] == "cantdelete") {
+            } else if ($_GET["error"] == "cantDelete") {
                 echo "<p class=\"warning\">Can't delete the issue at the moment!</p>";
-            } else if ($_GET["error"] == "notworking") {
+            } else if ($_GET["error"] == "notWorking") {
                 echo "<p class=\"success\">There are no issues available!</p>";
             } else if ($_GET["error"] == "none") {
                 echo "<p class=\"success\">Issue details Updated!</p>";

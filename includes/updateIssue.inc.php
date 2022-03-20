@@ -7,7 +7,7 @@ $issueId = $_POST["issueId"];
 $status = $_POST["status"];
 
 if (isset($_POST["submit"])) {
-    updateIssueData($conn, $issueId, $status);
+    adminUpdateIssue($conn, $issueId, $status);
 } else {
     header("location: ../admin/issue/viewIssue.php");
     exit();

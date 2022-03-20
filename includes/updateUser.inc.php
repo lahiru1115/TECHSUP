@@ -10,13 +10,13 @@ $userPhone = $_POST["userPhone"];
 
 if (isset($_POST["submit"])) {
 
-    if (emptyInputUpdate($userName, $userEmail, $userPhone) !== false) {
-        header("location: ../admin/users/viewUser.php?error=emptyinput");
+    if (adminUpdateUserEmptyInput($userName, $userEmail, $userPhone) !== false) {
+        header("location: ../admin/users/viewUser.php?error=emptyInput");
         exit();
     }
 
     if (invalidEmail($userEmail) !== false) {
-        header("location: ../admin/users/viewUser.php?error=invalidemail");
+        header("location: ../admin/users/viewUser.php?error=invalidEmail");
         exit();
     }
 

@@ -8,12 +8,12 @@ $pwd = $_POST["pwd"];
 
 if (isset($_POST["submit"])) {
 
-    if (emptyInputAdminLogin($name, $pwd) !== false) {
-        header("location: ../admin/main/login.php?error=emptyinput");
+    if (adminLoginEmptyInput($name, $pwd) !== false) {
+        header("location: ../admin/main/login.php?error=emptyInput");
         exit();
     }
 
-    loginAdmin($conn, $name, $pwd);
+    adminLogin($conn, $name, $pwd);
 } else {
     header("location: ../admin/main/login.php");
     exit();

@@ -11,12 +11,14 @@ require_once('../../includes/functions.inc.php');
 <head>
     <title>User | Add Issue</title>
     <style>
-        <?php include "../../css/outline.css";
+        <?php include "../../css/dashboardOutline.css";
         include "../../css/forms.css"; ?>
     </style>
 </head>
 
 <body>
+
+    <nav class="nav-h-back"></nav>
 
     <nav class="nav-h">
         <div class="heading">

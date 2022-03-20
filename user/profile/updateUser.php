@@ -12,12 +12,14 @@ $row = updateGet($conn);
 <head>
     <title>User | Update User</title>
     <style>
-        <?php include "../../css/outline.css";
+        <?php include "../../css/dashboardOutline.css";
         include "../../css/forms.css"; ?>
     </style>
 </head>
 
 <body>
+
+    <nav class="nav-h-back"></nav>
 
     <nav class="nav-h">
         <div class="heading">

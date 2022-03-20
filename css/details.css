@@ -1,0 +1,60 @@
+table,
+th,
+td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-collapse: collapse;
+}
+
+table {
+  width: 75%;
+}
+
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: 0.25s;
+}
+
+th {
+  color: white;
+  text-align: left;
+  width: 20%;
+}
+
+td {
+  padding: 10px 8px;
+  color: white;
+}
+
+.body {
+  margin-bottom: 50px;
+}
+
+.btnGroup {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+}
+
+#btnA {
+  color: white;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 36px;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: rgba(111, 185, 143, 0.5);
+  transition: 0.5s;
+}

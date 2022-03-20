@@ -31,11 +31,11 @@
         </form>
         <?php
         if (isset($_GET["error"])) {
-            if ($_GET["error"] == "emptyinput") {
+            if ($_GET["error"] == "emptyInput") {
                 echo "<p>Fill in all the fields!</p>";
-            } else if ($_GET["error"] == "invalidlogin") {
+            } else if ($_GET["error"] == "invalidLogin") {
                 echo "<p>Invalid Username or Password!</p>";
-            } else if ($_GET["error"] == "wrongpassword") {
+            } else if ($_GET["error"] == "wrongPassword") {
                 echo "<p>Invalid Username or Password!</p>";
             }
         }

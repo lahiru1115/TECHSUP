@@ -1,0 +1,18 @@
+h2 {
+  color: white;
+  margin-top: 0px;
+}
+
+.seeMore a {
+  color: whitesmoke;
+}
+
+.seeMore a:hover {
+  color: #6fb98f;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+.topMargin {
+  margin-top: 75px;
+}

@@ -10,36 +10,36 @@ $repwd = $_POST["repwd"];
 
 if (isset($_POST["submit"])) {
 
-    if (emptyInputAdminRegister($name, $email, $pwd, $repwd) !== false) {
-        header("location: ../admin/main/register.php?error=emptyinput");
+    if (adminRegisterEmptyInput($name, $email, $pwd, $repwd) !== false) {
+        header("location: ../admin/main/register.php?error=emptyInput");
         exit();
     }
 
     if (invaliduName($name) !== false) {
-        header("location: ../admin/main/register.php?error=invaliduname");
+        header("location: ../admin/main/register.php?error=invaliduName");
         exit();
     }
 
     if (invalidEmail($email) !== false) {
-        header("location: ../admin/main/register.php?error=invalidemail");
+        header("location: ../admin/main/register.php?error=invalidEmail");
         exit();
     }
 
     if (invalidPwd($pwd) == false) {
-        header("location: ../admin/main/register.php?error=invalidpwd");
+        header("location: ../admin/main/register.php?error=invalidPwd");
         exit();
     }
 
     if (pwdMatch($pwd, $repwd) !== false) {
-        header("location: ../admin/main/register.php?error=pwddontmatch");
+        header("location: ../admin/main/register.php?error=pwdDontMatch");
         exit();
     }
 
-    if (adminuNameExists($conn, $name, $email) !== false) {
-        header("location: ../admin/main/register.php?error=unametaken");
+    if (adminuNameEmailExists($conn, $name, $email) !== false) {
+        header("location: ../admin/main/register.php?error=uNameTaken");
         exit();
     } else {
-        createAdmin($conn, $name, $email, $pwd);
+        adminRegister($conn, $name, $email, $pwd);
     }
 } else {
     header("location: ../admin/main/register.php");

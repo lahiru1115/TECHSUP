@@ -3,7 +3,7 @@
 <?php
 require_once('../../includes/dbh.inc.php');
 require_once('../../includes/functions.inc.php');
-$row = updateGet($conn);
+$row = adminGetUserDataUpdate($conn);
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +12,14 @@ $row = updateGet($conn);
 <head>
     <title>Admin | Edit User</title>
     <style>
-        <?php include "../../css/adminOutline.css";
-        include "../../css/adminForm.css"; ?>
+        <?php include "../../css/dashboardOutline.css";
+        include "../../css/forms.css"; ?>
     </style>
 </head>
 
 <body>
+
+    <nav class="nav-h-back"></nav>
 
     <nav class="nav-h">
         <div class="heading">
@@ -41,6 +43,13 @@ $row = updateGet($conn);
                 ?>
             </div>
             <div>
+                <a href="../main/dashboard.php">
+                    <div class="item click">
+                        <img src="../../assets//home-outline-white-24dp.png">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <br>
                 <a href="../issues/viewIssue.php">
                     <div class="item click">
                         <img src="../../assets/issue-outline-white-24dp.png">
@@ -76,7 +85,7 @@ $row = updateGet($conn);
             <table>
                 <tr>
                     <td><label>User Id</label></td>
-                    <td><input type="text" name="userId" id="userId" placeholder="User Id" value="<?php echo $row['userId']; ?>" readonly></td>
+                    <td><input type="text" name="userId" id="userId" placeholder="User Id" class="disabledInput" value="<?php echo $row['userId']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>User Name</label></td>

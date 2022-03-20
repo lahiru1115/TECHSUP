@@ -1,7 +1,7 @@
 <?php
 
-// Done
-function emptyInputAdminRegister($name, $email, $pwd, $repwd)
+// Admin register empty input check
+function adminRegisterEmptyInput($name, $email, $pwd, $repwd)
 {
     if (empty($name) || empty($email) || empty($pwd) || empty($repwd)) {
         $result = true;
@@ -11,7 +11,7 @@ function emptyInputAdminRegister($name, $email, $pwd, $repwd)
     return $result;
 }
 
-// Done
+// Admin register invalid username check (Must be A-Z, a-z, 0-9) 
 function invaliduName($name)
 {
     if (!preg_match("/^[a-zA-Z0-9]*$/", $name)) {
@@ -22,7 +22,7 @@ function invaliduName($name)
     return $result;
 }
 
-// Done
+// Admin register invalid password check (Must be at least 4 characters) 
 function invalidPwd($pwd)
 {
     if (strlen($pwd) >= 4) {
@@ -33,7 +33,7 @@ function invalidPwd($pwd)
     return $result;
 }
 
-// Done
+// Admin invalid email check
 function invalidEmail($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -44,7 +44,7 @@ function invalidEmail($email)
     return $result;
 }
 
-// Done
+// Admin register password and re-enter password check
 function pwdMatch($pwd, $repwd)
 {
     if ($pwd !== $repwd) {
@@ -55,13 +55,13 @@ function pwdMatch($pwd, $repwd)
     return $result;
 }
 
-// Done
-function adminuNameExists($conn, $name, $email)
+// Admin existing username or email check
+function adminuNameEmailExists($conn, $name, $email)
 {
     $sql = "SELECT * FROM admin WHERE adminName = ? OR adminEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin/main/register.php?error=stmtfailed");
+        header("location: ../admin/main/register.php?error=stmtFailed");
         exit();
     }
 
@@ -80,13 +80,13 @@ function adminuNameExists($conn, $name, $email)
     mysqli_stmt_close($stmt);
 }
 
-// Done
-function createAdmin($conn, $name, $email, $pwd)
+// Create new admin account
+function adminRegister($conn, $name, $email, $pwd)
 {
     $sql = "INSERT INTO admin (adminName, adminEmail, adminPwd) VALUES (?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin/main/register.php?error=stmtfailed");
+        header("location: ../admin/main/register.php?error=stmtFailed");
         exit();
     }
 
@@ -99,8 +99,8 @@ function createAdmin($conn, $name, $email, $pwd)
     exit();
 }
 
-// Done
-function emptyInputAdminLogin($name, $pwd)
+// Admin login empty input check
+function adminLoginEmptyInput($name, $pwd)
 {
     if (empty($name)  || empty($pwd)) {
         $result = true;
@@ -110,24 +110,24 @@ function emptyInputAdminLogin($name, $pwd)
     return $result;
 }
 
-// Done
-function getIssueData($conn)
+// Admin get issue details of all users
+function adminGetIssueDataView($conn)
 {
-    $sql = "SELECT user.*, issue.*, IF(status, 'Solved', 'Pending') status FROM issue, user WHERE issue.userId = user.userId;";
+    $sql = "SELECT user.*, issue.*, IF(status, 'Solved', 'Pending') status FROM issue, user WHERE issue.userId = user.userId ORDER BY timestamp DESC;";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         return $result;
     } else {
-        header("location: ../admin/main/viewIssue.php?error=notworking");
+        header("location: ../admin/main/viewIssue.php?error=notWorking");
         exit();
     }
 }
 
-// Done
-function getUserData($conn)
+// Admin get user details
+function adminGetUserData($conn)
 {
-    $sql = "SELECT userId, userName, userEmail, userPhone FROM user";
+    $sql = "SELECT user.userId, userName, userEmail, userPhone, COUNT(issueId) FROM user, issue WHERE user.userId = issue.userId GROUP BY issue.userId";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -138,8 +138,8 @@ function getUserData($conn)
     }
 }
 
-// Done
-function deleteIssue($conn)
+// Admin delete issue
+function adminDeleteIssue($conn)
 {
     if (isset($_GET['issueId']) && is_numeric($_GET['issueId'])) {
         $issuesId = $_GET['issueId'];
@@ -151,13 +151,12 @@ function deleteIssue($conn)
             header("location: viewIssue.php?error=deleted");
             exit();
         } else {
-            header("location: viewIssue.php?error=cantdelete");
+            header("location: viewIssue.php?error=cantDelete");
             exit();
         }
     }
 }
 
-// Done
 function uNameExists($conn, $name, $email)
 {
     $sql = "SELECT * FROM user WHERE userName = ? OR userEmail = ?;";
@@ -182,7 +181,6 @@ function uNameExists($conn, $name, $email)
     mysqli_stmt_close($stmt);
 }
 
-// Done
 function emptyInputSignup($name, $email, $pNumber, $pwd, $repwd)
 {
     if (empty($name) || empty($email) || empty($pNumber) || empty($pwd) || empty($repwd)) {
@@ -193,7 +191,6 @@ function emptyInputSignup($name, $email, $pNumber, $pwd, $repwd)
     return $result;
 }
 
-// Done
 function createUser($conn, $name, $email, $pNumber, $pwd)
 {
     $sql = "INSERT INTO user (userName, userEmail, userPhone, userPwd) VALUES (?, ?, ?, ?);";
@@ -214,7 +211,6 @@ function createUser($conn, $name, $email, $pNumber, $pwd)
     exit();
 }
 
-// Done
 function emptyInputLogin($name, $pwd)
 {
     if (empty($name)  || empty($pwd)) {
@@ -225,7 +221,6 @@ function emptyInputLogin($name, $pwd)
     return $result;
 }
 
-// Done
 function loginUser($conn, $name, $pwd)
 {
     $uNameExists = uNameExists($conn, $name, $name);
@@ -250,13 +245,13 @@ function loginUser($conn, $name, $pwd)
     }
 }
 
-//Done
-function loginAdmin($conn, $name, $pwd)
+// Admin login validation
+function adminLogin($conn, $name, $pwd)
 {
-    $adminnameExists = adminuNameExists($conn, $name, $name);
+    $adminnameExists = adminuNameEmailExists($conn, $name, $name);
 
     if ($adminnameExists === false) {
-        header("location: ../admin/main/login.php?error=invalidlogin");
+        header("location: ../admin/main/login.php?error=invalidLogin");
         exit();
     }
 
@@ -264,7 +259,7 @@ function loginAdmin($conn, $name, $pwd)
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-        header("location: ../admin/main/login.php?error=wrongpassword");
+        header("location: ../admin/main/login.php?error=wrongPassword");
         exit();
     } else if ($checkPwd === true) {
         session_start();
@@ -275,7 +270,6 @@ function loginAdmin($conn, $name, $pwd)
     }
 }
 
-// Done
 function emptyInputSupport($title, $des)
 {
     if (empty($title)  || empty($des)) {
@@ -286,7 +280,6 @@ function emptyInputSupport($title, $des)
     return $result;
 }
 
-// Done
 function submitIssue($conn, $userId, $title, $description, $status)
 {
     $sql = "INSERT INTO issue (userId ,title, description, status, timestamp) VALUES (?, ?, ?, ?, now());";
@@ -321,8 +314,8 @@ function addUser($conn, $name, $email, $phone, $pwd)
     exit();
 }
 
-// Done
-function updateGet($conn)
+// Admin get user details for update
+function adminGetUserDataUpdate($conn)
 {
     if (isset($_GET['userId']) && is_numeric($_GET['userId'])) {
         $userId = $_GET['userId'];
@@ -336,7 +329,8 @@ function updateGet($conn)
     }
 }
 
-function emptyInputUpdate($name, $email, $phone)
+// Admin update user empty input check
+function adminUpdateUserEmptyInput($name, $email, $phone)
 {
     if (empty($name) || empty($email) || empty($phone)) {
         $result = true;
@@ -346,11 +340,10 @@ function emptyInputUpdate($name, $email, $phone)
     return $result;
 }
 
-// NOT WORKING ******************************************************************************************************************************************************
+// Update user details (userName, userEmail, userPhone)
 function updateUserData($conn, $userId, $userName, $userEmail, $userPhone)
 {
-    // $sql = "UPDATE user SET userName='$userName', userEmail='$userEmail', userPhone='$userPhone' WHERE userId='$userId';";
-    $sql = "UPDATE user set userName='" . $_POST['userName'] . "', userEmail='" . $_POST['userEmail'] . "', userPhone='" . $_POST['userPhone'] . "' WHERE userId='" . $_POST['userId'] . "'";
+    $sql = "UPDATE user SET userName='$userName', userEmail='$userEmail', userPhone='$userPhone' WHERE userId='$userId';";
 
     $update_query = mysqli_query($conn, $sql);
 
@@ -358,12 +351,12 @@ function updateUserData($conn, $userId, $userName, $userEmail, $userPhone)
         header("location: ../admin/users/viewUser.php?error=none");
         exit();
     } else {
-        header("location: ../admin/users/viewUser.php?error=cantupdate");
+        header("location: ../admin/users/viewUser.php?error=cantUpdate");
         exit();
     }
 }
 
-// Done
+// Admin delete user account
 function deleteUser($conn)
 {
     if (isset($_GET['userId']) && is_numeric($_GET['userId'])) {
@@ -382,8 +375,8 @@ function deleteUser($conn)
     }
 }
 
-// Done
-function issueGet($conn)
+// Admin get issue details for update
+function adminGetIssueDataUpdate($conn)
 {
     if (isset($_GET['issueId']) && is_numeric($_GET['issueId'])) {
         $issueId = $_GET['issueId'];
@@ -397,8 +390,23 @@ function issueGet($conn)
     }
 }
 
-// NOT WORKING ******************************************************************************************************************************************************
-function updateIssueData($conn, $issueId, $status)
+// Admin get issue details for view
+function adminGetIssueDataAll($conn)
+{
+    if (isset($_GET['issueId']) && is_numeric($_GET['issueId'])) {
+        $issueId = $_GET['issueId'];
+        $sql = "SELECT issueId, title, description, timestamp, issue.userId, userName, userEmail, userPhone, IF(status, 'Solved', 'Pending') status FROM issue, user WHERE issue.userId = user.userId AND issueId='$issueId';";
+        $get_issueId = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($get_issueId) == 1) {
+            $row = mysqli_fetch_assoc($get_issueId);
+            return ($row);
+        }
+    }
+}
+
+// Admin update issue (status)
+function adminUpdateIssue($conn, $issueId, $status)
 {
     $sql = "UPDATE issue SET status=" . $status . " WHERE issueId='$issueId';";
     $update_query = mysqli_query($conn, $sql);
@@ -407,12 +415,11 @@ function updateIssueData($conn, $issueId, $status)
         header("location: ../admin/issues/viewIssue.php?error=none");
         exit();
     } else {
-        header("location: ../admin/issues/viewIssue.php?error=cantupdate");
+        header("location: ../admin/issues/viewIssue.php?error=cantUpdate");
         exit();
     }
 }
 
-// Done
 function yourIssues($conn, $userId)
 {
     $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' ORDER BY timestamp DESC;";
@@ -428,7 +435,6 @@ function yourIssues($conn, $userId)
     }
 }
 
-// Done
 function userPendingIssues($conn, $userId)
 {
     $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' AND status=false ORDER BY timestamp DESC LIMIT 5;";
@@ -444,7 +450,54 @@ function userPendingIssues($conn, $userId)
     }
 }
 
-// Done
+// Admin get pending issue details of all users
+function adminPendingIssues($conn)
+{
+    $sql = "SELECT issueId, userName, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue, user WHERE issue.userId = user.userId AND status=false ORDER BY timestamp DESC LIMIT 10;";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        return $result;
+        exit();
+    } else {
+        // header("location: ../user/issues/viewIssue.php?error=notworking");
+        echo "<p class=\"success2\">There are no issues available!</p>";
+        exit();
+    }
+}
+
+// Admin get solved issue details of all users
+function adminSolvedIssues($conn)
+{
+    $sql = "SELECT issueId, userName, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue, user WHERE issue.userId = user.userId AND status=true ORDER BY timestamp DESC LIMIT 10;";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        return $result;
+        exit();
+    } else {
+        // header("location: ../user/issues/viewIssue.php?error=notworking");
+        echo "<p class=\"success2\">There are no issues available!</p>";
+        exit();
+    }
+}
+
+// Admin get most issues by users
+function adminMostIssues($conn)
+{
+    $sql = "SELECT user.userId, userName, userEmail, userPhone, COUNT(issueId) FROM user, issue WHERE user.userId = issue.userId GROUP BY issue.userId ORDER BY COUNT(issueId) DESC LIMIT 10";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        return $result;
+        exit();
+    } else {
+        // header("location: ../user/issues/viewIssue.php?error=notworking");
+        echo "<p class=\"success2\">There are no users available!</p>";
+        exit();
+    }
+}
+
 function updateUserDataProfile($conn, $userId, $userName, $userEmail, $userPhone, $pwd)
 {
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
@@ -460,7 +513,6 @@ function updateUserDataProfile($conn, $userId, $userName, $userEmail, $userPhone
     }
 }
 
-// Done
 function deleteAccount($conn)
 {
     if (isset($_GET['userId']) && is_numeric($_GET['userId'])) {
@@ -481,7 +533,6 @@ function deleteAccount($conn)
     }
 }
 
-// Done
 function deleteIssueUser($conn)
 {
     if (isset($_GET['issueId']) && is_numeric($_GET['issueId'])) {

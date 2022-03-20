@@ -3,7 +3,7 @@
 <?php
 require_once('../../includes/dbh.inc.php');
 require_once('../../includes/functions.inc.php');
-$row = issueGet($conn);
+$row = adminGetIssueDataUpdate($conn);
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +12,14 @@ $row = issueGet($conn);
 <head>
     <title>Admin | Edit Issue</title>
     <style>
-        <?php include "../../css/adminOutline.css";
-        include "../../css/adminForm.css"; ?>
+        <?php include "../../css/dashboardOutline.css";
+        include "../../css/forms.css"; ?>
     </style>
 </head>
 
 <body>
+
+    <nav class="nav-h-back"></nav>
 
     <nav class="nav-h">
         <div class="heading">
@@ -41,6 +43,13 @@ $row = issueGet($conn);
                 ?>
             </div>
             <div>
+                <a href="../main/dashboard.php">
+                    <div class="item click">
+                        <img src="../../assets/home-outline-white-24dp.png">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <br>
                 <a href="viewIssue.php">
                     <div class="item click">
                         <img src="../../assets/issue-outline-white-24dp.png">
@@ -75,24 +84,20 @@ $row = issueGet($conn);
         <form action="../../includes/updateIssue.inc.php" method="post">
             <table>
                 <tr>
-                    <td><label>User Id</label></td>
-                    <td><input type="text" name="userId" id="userId" placeholder="User Id" value="<?php echo $row['userId']; ?>" disabled></td>
-                </tr>
-                <tr>
                     <td><label>User Name</label></td>
-                    <td><input type="text" name="userName" id="userName" placeholder="User Name" value="<?php echo $row['userName']; ?>" disabled></td>
+                    <td><input type="text" name="userName" id="userName" placeholder="User Name" class="disabledInput" value="<?php echo $row['userName']; ?>" disabled></td>
                 </tr>
                 <tr>
                     <td><label>Issue Id</label></td>
-                    <td><input type="text" name="issueId" id="issueId" placeholder="Issue Id" value="<?php echo $row['issueId']; ?>" readonly></td>
+                    <td><input type="text" name="issueId" id="issueId" placeholder="Issue Id" class="disabledInput" value="<?php echo $row['issueId']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>Title</label></td>
-                    <td><input type="text" name="title" id="title" placeholder="Title" value="<?php echo $row['title']; ?>" disabled></td>
+                    <td><input type="text" name="title" id="title" placeholder="Title" class="disabledInput" value="<?php echo $row['title']; ?>" disabled></td>
                 </tr>
                 <tr>
                     <td><label>Description</label></td>
-                    <td><input type="text" name="description" id="description" placeholder="Description" value="<?php echo $row['description']; ?>" disabled></td>
+                    <td><textarea rows="10" cols="120" name="description" id="description" placeholder="Description" class="disabledInput" disabled><?php echo $row['description']; ?></textarea></td>
                 </tr>
                 <tr>
                     <td><label>Status</label></td>

@@ -11,12 +11,14 @@ require_once('../../includes/functions.inc.php');
 <head>
     <title>Admin | Users</title>
     <style>
-        <?php include "../../css/adminOutline.css";
-        include "../../css/adminTable.css"; ?>
+        <?php include "../../css/dashboardOutline.css";
+        include "../../css/tables.css"; ?>
     </style>
 </head>
 
 <body>
+
+    <nav class="nav-h-back"></nav>
 
     <nav class="nav-h">
         <div class="heading">
@@ -40,6 +42,13 @@ require_once('../../includes/functions.inc.php');
                 ?>
             </div>
             <div>
+                <a href="../main/dashboard.php">
+                    <div class="item click">
+                        <img src="../../assets//home-outline-white-24dp.png">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <br>
                 <a href="../issues/viewIssue.php">
                     <div class="item click">
                         <img src="../../assets/issue-outline-white-24dp.png">
@@ -74,17 +83,18 @@ require_once('../../includes/functions.inc.php');
         <table>
             <thead>
                 <tr>
-                    <th>User Id</th>
-                    <th>User Name</th>
-                    <th>User Email</th>
-                    <th>User Phone</th>
+                    <th class="thLeft">User Id</th>
+                    <th class="thLeft">User Name</th>
+                    <th class="thLeft">User Email</th>
+                    <th class="thLeft">User Phone</th>
+                    <th class="thLeft">No of Issues</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $result = getUserData($conn);
+                $result = adminGetUserData($conn);
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
@@ -92,6 +102,7 @@ require_once('../../includes/functions.inc.php');
                             <td><?php echo $row['userName']; ?></td>
                             <td><?php echo $row['userEmail']; ?></td>
                             <td><?php echo $row['userPhone']; ?></td>
+                            <td><?php echo $row['COUNT(issueId)']; ?></td>
                             <td><a href="updateUser.php?userId=<?php echo $row['userId']; ?>"><img src="../../assets/edit-outline-white-24dp.png"></a></td>
                             <td><a href="deleteUser.php?userId=<?php echo $row['userId']; ?>" onclick="return confirm('Do you really want to delete this record?')"><img src="../../assets/delete-outline-white-24dp.png"></a></td>
                         </tr>
@@ -103,17 +114,17 @@ require_once('../../includes/functions.inc.php');
         </table>
         <?php
         if (isset($_GET["error"])) {
-            if ($_GET["error"] == "emptyinput") {
+            if ($_GET["error"] == "emptyInput") {
                 echo "<p class=\"warning\">Fill in all the fields!</p>";
-            } else if ($_GET["error"] == "invaliduname") {
+            } else if ($_GET["error"] == "invaliduName") {
                 echo "<p class=\"warning\">Invalid Username!</p>";
-            } else if ($_GET["error"] == "invalidemail") {
+            } else if ($_GET["error"] == "invalidEmail") {
                 echo "<p class=\"warning\">Invalid Email!</p>";
-            } else if ($_GET["error"] == "cantupdate") {
+            } else if ($_GET["error"] == "cantUpdate") {
                 echo "<p class=\"warning\">Can't update the user at the moment!</p>";
-            } else if ($_GET["error"] == "cantdelete") {
+            } else if ($_GET["error"] == "cantDelete") {
                 echo "<p class=\"warning\">Can't delete the user at the moment!</p>";
-            } else if ($_GET["error"] == "notworking") {
+            } else if ($_GET["error"] == "notWorking") {
                 echo "<p class=\"success\">There are no users available!</p>";
             } else if ($_GET["error"] == "none") {
                 echo "<p class=\"success\">User details Updated!</p>";

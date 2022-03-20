@@ -2,6 +2,10 @@
   pointer-events: none;
 }
 
+.disabledInput {
+  cursor: not-allowed;
+}
+
 td {
   padding: 10px 30px 10px 0px;
 }
@@ -89,7 +93,7 @@ button:hover {
   transition: 0.5s;
 }
 
-.backBt {
+.backBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,7 +107,7 @@ button:hover {
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.backBt:hover {
+.backBtn:hover {
   cursor: pointer;
   background-color: rgba(111, 185, 143, 0.5);
   transition: 0.5s;

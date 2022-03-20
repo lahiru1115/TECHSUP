@@ -4,7 +4,7 @@
 <head>
     <title>User | Login</title>
     <style>
-        <?php include "../../css/userMain.css"; ?>
+        <?php include "../../css/userLoginReg.css"; ?>
     </style>
 </head>
 

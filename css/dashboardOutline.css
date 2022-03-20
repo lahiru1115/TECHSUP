@@ -9,7 +9,7 @@ body {
 .nav-h {
   width: 100%;
   height: 70px;
-  position: absolute;
+  position: fixed;
   background-image: linear-gradient(
     to left,
     rgba(44, 120, 115, 0),
@@ -17,10 +17,17 @@ body {
   );
 }
 
+.nav-h-back {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  background-color: #021c1e;
+}
+
 .nav-v {
   width: 250px;
   height: 100%;
-  position: absolute;
+  position: fixed;
   background-image: linear-gradient(
     to top,
     rgba(0, 68, 69, 0),
@@ -47,7 +54,7 @@ body {
 
 .menu {
   padding: 20px 15px 0px 15px;
-  height: 400px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
