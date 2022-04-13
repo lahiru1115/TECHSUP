@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 20, 2022 at 02:26 PM
+-- Generation Time: Apr 13, 2022 at 05:16 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`userId`),
   UNIQUE KEY `userName` (`userName`),
   UNIQUE KEY `userEmail` (`userEmail`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -106,7 +106,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`userId`, `userName`, `userEmail`, `userPhone`, `userPwd`) VALUES
 (1, 'lahiru', 'lahirudissanayake15@gmail.com', '765424752', '$2y$10$6VuPpqP8tg0oTWZRu5c/SegAqml3N558tl82.tAwgXfDvfKq1Q7xy'),
 (6, 'ucsc', 'ucsc@techsup.com', '011-1234567', '$2y$10$SEULGQv6sX81wFtxoNiQ9eq3kuy1DvNIFqSpjeBo7ii5HeKSr7XI.'),
-(9, 'Kavish', 'kavish@gmail.com', '0001245', '$2y$10$V93/DTLlKiRdFrjDLMfAw.EE5DbalCTbBdzOeTJQwOmZ6m9D3SnLS');
+(9, 'Kavish', 'kavish@gmail.com', '0001245', '$2y$10$V93/DTLlKiRdFrjDLMfAw.EE5DbalCTbBdzOeTJQwOmZ6m9D3SnLS'),
+(10, 'asdasd', 'sadasd@gmail.com', '53534535', '$2y$10$TdGkJmazQE2mDH4tayrUHOTBncSaD7xqfm1rWUChPlRsF6AhtcmCC');
 
 --
 -- Constraints for dumped tables
