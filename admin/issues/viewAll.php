@@ -71,7 +71,7 @@ $row = adminGetIssueDataAll($conn);
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logoutAdmin.inc.php">
+            <a href="../../includes/adminLogout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>

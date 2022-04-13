@@ -119,7 +119,7 @@ function adminGetIssueDataView($conn)
     if (mysqli_num_rows($result) > 0) {
         return $result;
     } else {
-        header("location: ../admin/main/viewIssue.php?error=notWorking");
+        header("location: ../admin/issues/viewIssue.php?error=notWorking");
         exit();
     }
 }
@@ -127,13 +127,13 @@ function adminGetIssueDataView($conn)
 // Admin get user details
 function adminGetUserData($conn)
 {
-    $sql = "SELECT user.userId, userName, userEmail, userPhone, COUNT(issueId) FROM user, issue WHERE user.userId = issue.userId GROUP BY issue.userId";
+    $sql = "SELECT userId, userName, userEmail, userPhone FROM user";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         return $result;
     } else {
-        header("location: ../admin/users/viewUser.php?error=notworking");
+        header("location: ../admin/users/viewUser.php?error=notWorking");
         exit();
     }
 }
@@ -369,7 +369,7 @@ function deleteUser($conn)
             header("location: viewuser.php?error=deleted");
             exit();
         } else {
-            header("location: viewuser.php?error=cantdelete");
+            header("location: viewuser.php?error=cantDelete");
             exit();
         }
     }

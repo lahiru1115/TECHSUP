@@ -25,7 +25,7 @@
 
             We have the knowledge and experience to assist and resolve issues, and users will receive accurate solutions. </p>
         <div>
-            <button type="button"><span></span> Get support!</button>
+            <button type="button"><span></span>Get support!</button>
         </div>
     </div>
 

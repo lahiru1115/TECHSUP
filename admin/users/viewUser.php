@@ -70,7 +70,7 @@ require_once('../../includes/functions.inc.php');
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logoutAdmin.inc.php">
+            <a href="../../includes/adminLogout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -87,7 +87,6 @@ require_once('../../includes/functions.inc.php');
                     <th class="thLeft">User Name</th>
                     <th class="thLeft">User Email</th>
                     <th class="thLeft">User Phone</th>
-                    <th class="thLeft">No of Issues</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -102,7 +101,6 @@ require_once('../../includes/functions.inc.php');
                             <td><?php echo $row['userName']; ?></td>
                             <td><?php echo $row['userEmail']; ?></td>
                             <td><?php echo $row['userPhone']; ?></td>
-                            <td><?php echo $row['COUNT(issueId)']; ?></td>
                             <td><a href="updateUser.php?userId=<?php echo $row['userId']; ?>"><img src="../../assets/edit-outline-white-24dp.png"></a></td>
                             <td><a href="deleteUser.php?userId=<?php echo $row['userId']; ?>" onclick="return confirm('Do you really want to delete this record?')"><img src="../../assets/delete-outline-white-24dp.png"></a></td>
                         </tr>

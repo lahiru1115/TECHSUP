@@ -71,7 +71,7 @@ $row = adminGetIssueDataUpdate($conn);
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logoutAdmin.inc.php">
+            <a href="../../includes/adminLogout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -81,7 +81,7 @@ $row = adminGetIssueDataUpdate($conn);
     </nav>
 
     <div class="body">
-        <form action="../../includes/updateIssue.inc.php" method="post">
+        <form action="../../includes/adminUpdateIssue.inc.php" method="post">
             <table>
                 <tr>
                     <td><label>User Name</label></td>

@@ -12,7 +12,7 @@ if (isset($_POST["submit"])) {
         header("location: ../admin/main/login.php?error=emptyInput");
         exit();
     }
-
+    
     adminLogin($conn, $name, $pwd);
 } else {
     header("location: ../admin/main/login.php");

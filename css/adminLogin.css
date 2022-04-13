@@ -1,7 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url("../../assets/admin-bg.jpg");
+  background-image: linear-gradient(
+      to left,
+      rgba(44, 120, 115, 0.25),
+      rgba(44, 120, 115, 0.25)
+    ),
+    url("../../assets/user-bg.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;

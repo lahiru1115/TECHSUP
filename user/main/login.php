@@ -32,11 +32,11 @@
         </form>
         <?php
         if (isset($_GET["error"])) {
-            if ($_GET["error"] == "emptyinput") {
+            if ($_GET["error"] == "emptyInput") {
                 echo "<p class=\"warning\">Fill in all the fields!</p>";
-            } else if ($_GET["error"] == "invalidlogin") {
+            } else if ($_GET["error"] == "invalidLogin") {
                 echo "<p class=\"warning\">Invalid Username or Password!</p>";
-            } else if ($_GET["error"] == "wrongpassword") {
+            } else if ($_GET["error"] == "wrongPassword") {
                 echo "<p class=\"warning\">Invalid Username or Password!</p>";
             } else if ($_GET["error"] == "deleted") {
                 echo "<p class='success'>Your account was deleted!</p>";
