@@ -57,7 +57,7 @@ require_once('../../includes/functions.inc.php');
                 </a>
                 <br>
                 <a href="#" class="disabled">
-                    <div class="item click">
+                    <div class="item click active">
                         <img src="../../assets/users-outline-white-24dp.png">
                         <span>User Management</span>
                     </div>

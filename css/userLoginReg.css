@@ -132,3 +132,29 @@ a:hover {
   color: lightgreen;
   text-align: center;
 }
+
+/* For Laptop 125% */
+@media screen and (min-width: 1280px) {
+  .topMargin {
+    margin-top: 100px;
+  }
+  .bottomMargin {
+    width: 100%;
+    height: 30px;
+    bottom: -150px;
+    position: absolute;
+  }
+}
+
+/* For Monitor 100% */
+@media screen and (min-width: 1920px) {
+  .topMargin {
+    margin-top: 25px;
+  }
+  .bottomMargin {
+    width: 100%;
+    height: 30px;
+    bottom: 0px;
+    position: absolute;
+  }
+}

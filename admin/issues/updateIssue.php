@@ -51,7 +51,7 @@ $row = adminGetIssueDataUpdate($conn);
                 </a>
                 <br>
                 <a href="viewIssue.php">
-                    <div class="item click">
+                    <div class="item click active">
                         <img src="../../assets/issue-outline-white-24dp.png">
                         <span>Issue Management</span>
                     </div>

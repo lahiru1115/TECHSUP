@@ -5,43 +5,43 @@ require_once 'functions.inc.php';
 
 $name = $_POST["name"];
 $email = $_POST["email"];
-$pNumber = $_POST["pNumber"];
+$phone = $_POST["phone"];
 $pwd = $_POST["pwd"];
 $repwd = $_POST["repwd"];
 
 if (isset($_POST["submit"])) {
 
-    if (emptyInputSignup($name, $email, $pNumber, $pwd, $repwd) !== false) {
-        header("location: ../user/main/register.php?error=emptyinput");
+    if (userRegisterEmptyInput($name, $email, $phone, $pwd, $repwd) !== false) {
+        header("location: ../user/main/register.php?error=emptyInput");
         exit();
     }
 
     if (invaliduName($name) !== false) {
-        header("location: ../user/main/register.php?error=invaliduname");
+        header("location: ../user/main/register.php?error=invaliduName");
         exit();
     }
 
     if (invalidEmail($email) !== false) {
-        header("location: ../user/main/register.php?error=invalidemail");
+        header("location: ../user/main/register.php?error=invalidEmail");
         exit();
     }
 
     if (invalidPwd($pwd) == false) {
-        header("location: ../user/main/register.php?error=invalidpwd");
+        header("location: ../user/main/register.php?error=invalidPwd");
         exit();
     }
 
     if (pwdMatch($pwd, $repwd) !== false) {
-        header("location: ../user/main/register.php?error=pwddontmatch");
+        header("location: ../user/main/register.php?error=pwdDontMatch");
         exit();
     }
 
-    if (unameExists($conn, $name, $email) !== false) {
-        header("location: ../user/main/register.php?error=unametaken");
+    if (useruNameEmailExists($conn, $name, $email) !== false) {
+        header("location: ../user/main/register.php?error=uNameTaken");
         exit();
         
     } else {
-        createUser($conn, $name, $email, $pNumber, $pwd);
+        userRegister($conn, $name, $email, $phone, $pwd);
     }
 } else {
     header("location: ../user/main/register.php");

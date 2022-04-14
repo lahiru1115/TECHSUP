@@ -87,12 +87,16 @@ a {
 }
 
 .click:hover {
-  background-color: rgba(111, 185, 143, 0.5);
+  background-color: rgba(111, 185, 143, 0.25);
   transition: 0.5s;
 }
 
+.active {
+  background-color: rgba(111, 185, 143, 0.5);
+}
+
 .logout {
-    border: 1px solid transparent;
+  border: 1px solid transparent;
 }
 
 .logout:hover {

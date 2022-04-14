@@ -8,14 +8,14 @@ $pwd = $_POST["pwd"];
 
 if (isset($_POST["submit"])) {
 
-    if (emptyInputLogin($name, $pwd) !== false) {
-        header("location: ../user/main/login.php?error=emptyinput");
+    if (userLoginEmptyInput($name, $pwd) !== false) {
+        header("location: ../user/main/login.php?error=emptyInput");
         exit();
     }
     if ($name == "admin@2") {
         header("location: ../admin/main/login.php");
     } else {
-        loginUser($conn, $name, $pwd);
+        userLogin($conn, $name, $pwd);
     }
 } else {
     header("location: ../user/main/login.php");

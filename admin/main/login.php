@@ -35,8 +35,6 @@
                 echo "<p>Fill in all the fields!</p>";
             } else if ($_GET["error"] == "invalidLogin") {
                 echo "<p>Invalid Username or Password!</p>";
-            } else if ($_GET["error"] == "wrongPassword") {
-                echo "<p>Invalid Username or Password!</p>";
             }
         }
         ?>

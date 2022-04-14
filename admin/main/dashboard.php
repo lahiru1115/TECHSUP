@@ -44,7 +44,7 @@ require_once('../../includes/functions.inc.php');
             </div>
             <div>
                 <a href="#" class="disabled">
-                    <div class="item click">
+                    <div class="item click active">
                         <img src="../../assets/home-outline-white-24dp.png">
                         <span>Home</span>
                     </div>

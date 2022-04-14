@@ -51,7 +51,7 @@ $row = adminGetIssueDataAll($conn);
                 </a>
                 <br>
                 <a href="viewIssue.php">
-                    <div class="item click">
+                    <div class="item click active">
                         <img src="../../assets/issue-outline-white-24dp.png">
                         <span>Issue Management</span>
                     </div>
@@ -140,7 +140,7 @@ $row = adminGetIssueDataAll($conn);
                 </a>
             </div>
             <div>
-                <a href="deleteIssue.php?issueId=<?php echo $row['issueId']; ?>" id="btnA">
+                <a href="deleteIssue.php?issueId=<?php echo $row['issueId']; ?>" onclick="return confirm('Do you really want to delete this record?')" id="btnA">
                     <div class="btn">
                         <img src="../../assets/delete-outline-white-24dp.png">
                         &nbsp;

@@ -11,7 +11,7 @@ function adminRegisterEmptyInput($name, $email, $pwd, $repwd)
     return $result;
 }
 
-// Admin register invalid username check (Must be A-Z, a-z, 0-9) 
+// Admin & User register invalid username check (Must be A-Z, a-z, 0-9) 
 function invaliduName($name)
 {
     if (!preg_match("/^[a-zA-Z0-9]*$/", $name)) {
@@ -22,7 +22,7 @@ function invaliduName($name)
     return $result;
 }
 
-// Admin register invalid password check (Must be at least 4 characters) 
+// Admin & User register invalid password check (Must be at least 4 characters) 
 function invalidPwd($pwd)
 {
     if (strlen($pwd) >= 4) {
@@ -33,7 +33,7 @@ function invalidPwd($pwd)
     return $result;
 }
 
-// Admin invalid email check
+// Admin & User invalid email check
 function invalidEmail($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -44,7 +44,7 @@ function invalidEmail($email)
     return $result;
 }
 
-// Admin register password and re-enter password check
+// Admin & User register password and re-enter password check
 function pwdMatch($pwd, $repwd)
 {
     if ($pwd !== $repwd) {
@@ -56,16 +56,16 @@ function pwdMatch($pwd, $repwd)
 }
 
 // Admin existing username or email check
-function adminuNameEmailExists($conn, $name, $email)
+function adminuNameEmailExists($conn, $name)
 {
-    $sql = "SELECT * FROM admin WHERE adminName = ? OR adminEmail = ?;";
+    $sql = "SELECT * FROM admin WHERE adminName = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../admin/main/register.php?error=stmtFailed");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ss", $name, $email);
+    mysqli_stmt_bind_param($stmt, "s", $name);
     mysqli_stmt_execute($stmt);
 
     $resultData = mysqli_stmt_get_result($stmt);
@@ -102,7 +102,7 @@ function adminRegister($conn, $name, $email, $pwd)
 // Admin login empty input check
 function adminLoginEmptyInput($name, $pwd)
 {
-    if (empty($name)  || empty($pwd)) {
+    if (empty($name) || empty($pwd)) {
         $result = true;
     } else {
         $result = false;
@@ -157,12 +157,13 @@ function adminDeleteIssue($conn)
     }
 }
 
-function uNameExists($conn, $name, $email)
+// User existing username or email check
+function useruNameEmailExists($conn, $name, $email)
 {
     $sql = "SELECT * FROM user WHERE userName = ? OR userEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../user/main/register.php?error=stmtfailed");
+        header("location: ../user/main/register.php?error=stmtFailed");
         exit();
     }
 
@@ -181,9 +182,10 @@ function uNameExists($conn, $name, $email)
     mysqli_stmt_close($stmt);
 }
 
-function emptyInputSignup($name, $email, $pNumber, $pwd, $repwd)
+// User register empty input check
+function userRegisterEmptyInput($name, $email, $phone, $pwd, $repwd)
 {
-    if (empty($name) || empty($email) || empty($pNumber) || empty($pwd) || empty($repwd)) {
+    if (empty($name) || empty($email) || empty($phone) || empty($pwd) || empty($repwd)) {
         $result = true;
     } else {
         $result = false;
@@ -191,27 +193,29 @@ function emptyInputSignup($name, $email, $pNumber, $pwd, $repwd)
     return $result;
 }
 
-function createUser($conn, $name, $email, $pNumber, $pwd)
+// Create new user account
+function userRegister($conn, $name, $email, $phone, $pwd)
 {
     $sql = "INSERT INTO user (userName, userEmail, userPhone, userPwd) VALUES (?, ?, ?, ?);";
 
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../user/main/register.php?error=stmtfailed");
+        header("location: ../user/main/register.php?error=stmtFailed");
         exit();
     }
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $pNumber, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $phone, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../user/main/register.php?error=none");
     exit();
 }
 
-function emptyInputLogin($name, $pwd)
+// User login empty input check
+function userLoginEmptyInput($name, $pwd)
 {
     if (empty($name)  || empty($pwd)) {
         $result = true;
@@ -221,12 +225,13 @@ function emptyInputLogin($name, $pwd)
     return $result;
 }
 
-function loginUser($conn, $name, $pwd)
+// User login validation
+function userLogin($conn, $name, $pwd)
 {
-    $uNameExists = uNameExists($conn, $name, $name);
+    $uNameExists = useruNameEmailExists($conn, $name, $name);
 
     if ($uNameExists === false) {
-        header("location: ../user/main/login.php?error=invalidlogin");
+        header("location: ../user/main/login.php?error=invalidLogin");
         exit();
     }
 
@@ -234,7 +239,7 @@ function loginUser($conn, $name, $pwd)
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-        header("location: ../user/main/login.php?error=wrongpassword");
+        header("location: ../user/main/login.php?error=wrongPassword");
         exit();
     } else if ($checkPwd === true) {
         session_start();
@@ -248,7 +253,7 @@ function loginUser($conn, $name, $pwd)
 // Admin login validation
 function adminLogin($conn, $name, $pwd)
 {
-    $adminnameExists = adminuNameEmailExists($conn, $name, $name);
+    $adminnameExists = adminuNameEmailExists($conn, $name);
 
     if ($adminnameExists === false) {
         header("location: ../admin/main/login.php?error=invalidLogin");
@@ -259,7 +264,7 @@ function adminLogin($conn, $name, $pwd)
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-        header("location: ../admin/main/login.php?error=wrongPassword");
+        header("location: ../admin/main/login.php?error=invalidLogin");
         exit();
     } else if ($checkPwd === true) {
         session_start();
@@ -408,7 +413,8 @@ function adminGetIssueDataAll($conn)
 // Admin update issue (status)
 function adminUpdateIssue($conn, $issueId, $status)
 {
-    $sql = "UPDATE issue SET status=" . $status . " WHERE issueId='$issueId';";
+    // $sql = "UPDATE issue SET status=" . $status . " WHERE issueId='$issueId';";
+    $sql = "UPDATE issue SET status=$status WHERE issueId='$issueId';";
     $update_query = mysqli_query($conn, $sql);
 
     if ($update_query) {
