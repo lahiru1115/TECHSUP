@@ -16,7 +16,7 @@
             <li><a href="#"> Register </a></li>
             <li><a href="user/main/login.php"> Login </a></li>
             <li><a href="#"> Facilities </a></li>
-            <li><a href="#"> Help </a></li>
+            <li><a href="help.php"> Help </a></li>
         </ul>
     </div>
     <div class="content">
