@@ -3,14 +3,14 @@
 <?php
 require_once('../../includes/dbh.inc.php');
 require_once('../../includes/functions.inc.php');
-$row = adminGetUserDataUpdate($conn);
+$row = getUserDataUpdate($conn);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>User | Update User</title>
+    <title>User | Edit User</title>
     <style>
         <?php include "../../css/dashboardOutline.css";
         include "../../css/forms.css"; ?>
@@ -23,7 +23,7 @@ $row = adminGetUserDataUpdate($conn);
 
     <nav class="nav-h">
         <div class="heading">
-            <h1>Update User</h1>
+            <h1>Edit User</h1>
         </div>
     </nav>
 
@@ -43,6 +43,13 @@ $row = adminGetUserDataUpdate($conn);
                 ?>
             </div>
             <div>
+                <a href="../main/dashboard.php">
+                    <div class="item click">
+                        <img src="../../assets/home-outline-white-24dp.png">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <br>
                 <a href="../issues/addIssue.php">
                     <div class="item click">
                         <img src="../../assets/add-outline-white-24dp">
@@ -58,13 +65,13 @@ $row = adminGetUserDataUpdate($conn);
                 </a>
                 <br>
                 <a href="#" class="disabled">
-                    <div class="item click">
+                    <div class="item click active">
                         <img src="../../assets/manageAccounts-outline-white-24dp">
                         <span>Settings</span>
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logout.inc.php">
+            <a href="../../includes/userLogout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -74,23 +81,23 @@ $row = adminGetUserDataUpdate($conn);
     </nav>
 
     <div class="body">
-        <form action="../../includes/updateUserProfile.inc.php" method="post">
+        <form action="../../includes/userUpdateProfile.inc.php" method="post">
             <table>
                 <tr>
                     <td><label>User Id</label></td>
-                    <td><input type="text" name="userId" id="userId" placeholder="User Id" value="<?php echo $row['userId']; ?>" readonly></td>
+                    <td><input type="text" name="userId" id="userId" placeholder="User Id" class="disabledInput" value="<?php echo $row['userId']; ?>" readonly></td>
                 </tr>
                 <tr>
                     <td><label>User Name</label></td>
-                    <td><input type="text" name="userName" id="userName" placeholder="User Name" value="<?php echo $row['userName']; ?>" readonly></td>
+                    <td><input type="text" name="userName" id="userName" placeholder="User Name" class="disabledInput" value="<?php echo $row['userName']; ?>" disabled></td>
                 </tr>
                 <tr>
                     <td><label>Email</label></td>
-                    <td><input type="email" name="userEmail" id="userEmail" placeholder="Email" value="<?php echo $row['userEmail']; ?>" readonly></td>
+                    <td><input type="email" name="userEmail" id="userEmail" placeholder="Email" class="disabledInput" value="<?php echo $row['userEmail']; ?>" disabled></td>
                 </tr>
                 <tr>
                     <td><label>Phone no</label></td>
-                    <td><input type="tel" name="userPhone" id="userPhone" placeholder="Phone no" value="<?php echo $row['userPhone']; ?>" readonly></td>
+                    <td><input type="tel" name="userPhone" id="userPhone" placeholder="Phone no" class="disabledInput" value="<?php echo $row['userPhone']; ?>" disabled></td>
                 </tr>
                 <tr>
                     <td><label>Password</label></td>
@@ -101,24 +108,29 @@ $row = adminGetUserDataUpdate($conn);
                     <td><input type="password" name="repwd" id="repwd" placeholder="Re-Enter your password"></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><button type="submit" name="submit">UPDATE</button></td>
+                    <td><button type="submit" name="submit">UPDATE</button></td>
+                    <td>
+                        <div class="del">
+                            <a href="deleteUser.php?userId=<?php echo $row['userId']; ?>" onclick="return confirm('Are you sure you want to delete your account?')"><button>Delete the Account</button></a>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </form>
-        <div class="del">
-            <a href="deleteUser.php?userId=<?php echo $row['userId']; ?>" onclick="return confirm('Are you sure you want to delete your account?')"><button>Delete the Account</button></a>
-        </div>
+
         <?php
         if (isset($_GET["error"])) {
-            if ($_GET["error"] == "invaliduname") {
+            if ($_GET["error"] == "invaliduName") {
                 echo "<p class=\"warning\">Invalid Username!</p>";
-            } else if ($_GET["error"] == "invalidemail") {
+            } else if ($_GET["error"] == "invalidEmail") {
                 echo "<p class=\"warning\">Invalid Email!</p>";
-            } else if ($_GET["error"] == "cantupdate") {
+            } else if ($_GET["error"] == "cantUpdate") {
                 echo "<p class=\"warning\">Can't update the user at the moment!</p>";
-            } else if ($_GET["error"] == "cantdelete") {
+            } else if ($_GET["error"] == "pwdDontMatch") {
+                echo "<p class=\"warning\">Passwords don't match!</p>";
+            } else if ($_GET["error"] == "cantDelete") {
                 echo "<p class=\"warning\">Can't delete the user at the moment!</p>";
-            } else if ($_GET["error"] == "notworking") {
+            } else if ($_GET["error"] == "notWorking") {
                 echo "<p class=\"success\">There are no users available!</p>";
             } else if ($_GET["error"] == "none") {
                 echo "<p class=\"success\">User details Updated!</p>";

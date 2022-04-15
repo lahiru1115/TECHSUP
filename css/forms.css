@@ -129,7 +129,6 @@ button:hover {
 .del button {
   width: 250px;
   height: 36px;
-  margin-top: 50px;
   border: none;
   background: rgba(255, 0, 0, 0.75);
   color: white;
@@ -141,7 +140,7 @@ button:hover {
 
 .del button:hover {
   cursor: pointer;
-  background: whitesmoke;
+  background: #6fb98f;
   color: black;
   transition: 0.5s;
 }

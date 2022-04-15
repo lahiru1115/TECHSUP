@@ -10,12 +10,12 @@ $status = $_POST["status"];
 
 if (isset($_POST["submit"])) {
 
-    if (emptyInputSupport($title, $description) !== false) {
-        header("location: ../user/issues/addIssue.php?error=emptyinput");
+    if (userAddIssueEmptyInput($title, $description) !== false) {
+        header("location: ../user/issues/addIssue.php?error=emptyInput");
         exit();
     }
 
-    submitIssue($conn, $userId, $title, $description, $status);
+    addIssue($conn, $userId, $title, $description, $status);
 } else {
     header("location: ../support/supportticket.php");
     exit();

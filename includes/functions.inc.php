@@ -239,7 +239,7 @@ function userLogin($conn, $name, $pwd)
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-        header("location: ../user/main/login.php?error=wrongPassword");
+        header("location: ../user/main/login.php?error=invalidLogin");
         exit();
     } else if ($checkPwd === true) {
         session_start();
@@ -275,7 +275,8 @@ function adminLogin($conn, $name, $pwd)
     }
 }
 
-function emptyInputSupport($title, $des)
+// User add issue empty input check
+function userAddIssueEmptyInput($title, $des)
 {
     if (empty($title)  || empty($des)) {
         $result = true;
@@ -285,12 +286,13 @@ function emptyInputSupport($title, $des)
     return $result;
 }
 
-function submitIssue($conn, $userId, $title, $description, $status)
+// User add new issue
+function addIssue($conn, $userId, $title, $description, $status)
 {
     $sql = "INSERT INTO issue (userId ,title, description, status, timestamp) VALUES (?, ?, ?, ?, now());";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../user/issues/addIssue.php?error=stmtfailed");
+        header("location: ../user/issues/addIssue.php?error=stmtFailed");
         exit();
     }
 
@@ -319,8 +321,8 @@ function addUser($conn, $name, $email, $phone, $pwd)
     exit();
 }
 
-// Admin get user details for update
-function adminGetUserDataUpdate($conn)
+// Admin & User get user details for update
+function getUserDataUpdate($conn)
 {
     if (isset($_GET['userId']) && is_numeric($_GET['userId'])) {
         $userId = $_GET['userId'];
@@ -441,9 +443,10 @@ function yourIssues($conn, $userId)
     }
 }
 
-function userPendingIssues($conn, $userId)
+// Admin get pending issue details of all users
+function adminPendingIssues($conn)
 {
-    $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' AND status=false ORDER BY timestamp DESC LIMIT 5;";
+    $sql = "SELECT issueId, userName, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue, user WHERE issue.userId = user.userId AND status=false ORDER BY timestamp DESC LIMIT 10;";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -456,10 +459,10 @@ function userPendingIssues($conn, $userId)
     }
 }
 
-// Admin get pending issue details of all users
-function adminPendingIssues($conn)
+// User get pending issue details
+function userPendingIssues($conn, $userId)
 {
-    $sql = "SELECT issueId, userName, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue, user WHERE issue.userId = user.userId AND status=false ORDER BY timestamp DESC LIMIT 10;";
+    $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' AND status=false ORDER BY timestamp DESC LIMIT 10;";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -488,6 +491,22 @@ function adminSolvedIssues($conn)
     }
 }
 
+// User get solved issue details of all users
+function userSolvedIssues($conn, $userId)
+{
+    $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' AND status=true ORDER BY timestamp DESC LIMIT 10;";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        return $result;
+        exit();
+    } else {
+        // header("location: ../user/issues/viewIssue.php?error=notworking");
+        echo "<p class=\"success2\">There are no issues available!</p>";
+        exit();
+    }
+}
+
 // Admin get most issues by users
 function adminMostIssues($conn)
 {
@@ -504,22 +523,24 @@ function adminMostIssues($conn)
     }
 }
 
-function updateUserDataProfile($conn, $userId, $userName, $userEmail, $userPhone, $pwd)
+// User update profile (Only password)
+function userUpdateProfile($conn, $userId, $pwd)
 {
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-    $sql = "UPDATE user SET userName='$userName', userEmail='$userEmail', userPhone='$userPhone', userPwd='$hashedPwd' WHERE userId='$userId';";
+    $sql = "UPDATE user SET userPwd='$hashedPwd' WHERE userId='$userId';";
     $update_query = mysqli_query($conn, $sql);
 
     if ($update_query) {
         header("location: ../user/profile/updateUser.php?error=none");
         exit();
     } else {
-        header("location: ../user/profile/updateUser.php?error=cantupdate");
+        header("location: ../user/profile/updateUser.php?error=cantUpdate");
         exit();
     }
 }
 
-function deleteAccount($conn)
+// User delete profile
+function userDeleteProfile($conn)
 {
     if (isset($_GET['userId']) && is_numeric($_GET['userId'])) {
         $userId = $_GET['userId'];
@@ -533,13 +554,14 @@ function deleteAccount($conn)
             header("location: ../main/login.php?error=deleted");
             exit();
         } else {
-            header("location: updateUser.php?error=cantdelete");
+            header("location: updateUser.php?error=cantDelete");
             exit();
         }
     }
 }
 
-function deleteIssueUser($conn)
+// User delete issue
+function userDeleteIssue($conn)
 {
     if (isset($_GET['issueId']) && is_numeric($_GET['issueId'])) {
         $issueId = $_GET['issueId'];
@@ -551,7 +573,7 @@ function deleteIssueUser($conn)
             header("location: ../issues/viewIssue.php?error=deleted");
             exit();
         } else {
-            header("location: ../issues/viewIssue.php?error=cantdelete");
+            header("location: ../issues/viewIssue.php?error=cantDelete");
             exit();
         }
     }

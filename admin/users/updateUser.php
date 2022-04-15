@@ -3,7 +3,7 @@
 <?php
 require_once('../../includes/dbh.inc.php');
 require_once('../../includes/functions.inc.php');
-$row = adminGetUserDataUpdate($conn);
+$row = getUserDataUpdate($conn);
 ?>
 
 <!DOCTYPE html>

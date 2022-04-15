@@ -9,7 +9,7 @@ require_once('../../includes/functions.inc.php');
 <html lang="en">
 
 <head>
-    <title>User | Dashboard</title>
+    <title>User | Home</title>
     <style>
         <?php include "../../css/dashboardOutline.css";
         include "../../css/dashboardMain.css";
@@ -23,7 +23,7 @@ require_once('../../includes/functions.inc.php');
 
     <nav class="nav-h">
         <div class="heading">
-            <h1>Dashboard</h1>
+            <h1>Home</h1>
         </div>
     </nav>
 
@@ -43,6 +43,13 @@ require_once('../../includes/functions.inc.php');
                 ?>
             </div>
             <div>
+                <a href="#" class="disabled">
+                    <div class="item click active">
+                        <img src="../../assets/home-outline-white-24dp.png">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <br>
                 <a href="../issues/addIssue.php">
                     <div class="item click">
                         <img src="../../assets/add-outline-white-24dp">
@@ -67,7 +74,7 @@ require_once('../../includes/functions.inc.php');
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logout.inc.php">
+            <a href="../../includes/userLogout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -77,40 +84,84 @@ require_once('../../includes/functions.inc.php');
     </nav>
 
     <div class="body">
-        <h2>Pending Issues</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th class="thLeft">Issue Id</th>
-                    <th class="thLeft">Title</th>
-                    <th class="thLeft">Description</th>
-                    <th class="thLeft">Date & Time</th>
-                    <th class="thLeft">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $userId = $_SESSION['userId'];
-                $result = userPendingIssues($conn, $userId);
-                if ($result) {
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <tr>
-                            <td><?php echo $row['issueId']; ?></td>
-                            <td><?php echo $row['title']; ?></td>
-                            <td><?php echo $row['description']; ?></td>
-                            <td><?php echo $row['timestamp']; ?></td>
-                            <td><?php echo $row['status']; ?></td>
-                        </tr>
-                <?php
+        <div class="userPendingIssues">
+            <h2>Pending Issues</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="thLeft">Issue Id</th>
+                        <th class="thLeft">Title</th>
+                        <th class="thLeft descr">Description</th>
+                        <th class="thLeft">Date & Time</th>
+                        <th class="thLeft">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $result = userPendingIssues($conn, $userId);
+                    if ($result) {
+                        while ($row = mysqli_fetch_assoc($result)) { ?>
+                            <tr>
+                                <td><?php echo $row['issueId']; ?></td>
+                                <td><?php echo $row['title']; ?></td>
+                                <td><?php if (strlen($row['description']) > 100) {
+                                        echo substr($row['description'], 0, 100) . "...";
+                                    } else {
+                                        echo $row['description'];
+                                    } ?></td>
+                                <td><?php echo $row['timestamp']; ?></td>
+                                <td><?php echo $row['status']; ?></td>
+                            </tr>
+                    <?php
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
-        <div class="seeMore">
-
+                    ?>
+                </tbody>
+            </table>
+            <br>
+            <div class="seeMore">
+                <a href="../issues/viewIssue.php">See more...</a>
+            </div>
         </div>
-        <a href="../issues/viewIssue.php">See more...</a>
+        <div class="userSolvedIssues topMargin">
+            <h2>Solved Issues</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="thLeft">Issue Id</th>
+                        <th class="thLeft">Title</th>
+                        <th class="thLeft descr">Description</th>
+                        <th class="thLeft">Date & Time</th>
+                        <th class="thLeft">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $result = userSolvedIssues($conn, $userId);
+                    if ($result) {
+                        while ($row = mysqli_fetch_assoc($result)) { ?>
+                            <tr>
+                                <td><?php echo $row['issueId']; ?></td>
+                                <td><?php echo $row['title']; ?></td>
+                                <td><?php if (strlen($row['description']) > 100) {
+                                        echo substr($row['description'], 0, 100) . "...";
+                                    } else {
+                                        echo $row['description'];
+                                    } ?></td>
+                                <td><?php echo $row['timestamp']; ?></td>
+                                <td><?php echo $row['status']; ?></td>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <br>
+            <div class="seeMore">
+                <a href="../issues/viewIssue.php">See more...</a>
+            </div>
+        </div>
     </div>
 
 </body>

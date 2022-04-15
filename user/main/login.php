@@ -36,8 +36,6 @@
                 echo "<p class=\"warning\">Fill in all the fields!</p>";
             } else if ($_GET["error"] == "invalidLogin") {
                 echo "<p class=\"warning\">Invalid Username or Password!</p>";
-            } else if ($_GET["error"] == "wrongPassword") {
-                echo "<p class=\"warning\">Invalid Username or Password!</p>";
             } else if ($_GET["error"] == "deleted") {
                 echo "<p class='success'>Your account was deleted!</p>";
             }

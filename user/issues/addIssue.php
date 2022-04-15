@@ -42,8 +42,15 @@ require_once('../../includes/functions.inc.php');
                 ?>
             </div>
             <div>
-                <a href="#" class="disabled">
+                <a href="../main/dashboard.php">
                     <div class="item click">
+                        <img src="../../assets/home-outline-white-24dp.png">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <br>
+                <a href="#" class="disabled">
+                    <div class="item click active">
                         <img src="../../assets/add-outline-white-24dp">
                         <span>Add Issue</span>
                     </div>
@@ -66,7 +73,7 @@ require_once('../../includes/functions.inc.php');
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logout.inc.php">
+            <a href="../../includes/userLogout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -76,7 +83,7 @@ require_once('../../includes/functions.inc.php');
     </nav>
 
     <div class="body">
-        <form method="post" action="../../includes/addIssue.inc.php">
+        <form method="post" action="../../includes/userAddIssue.inc.php">
             <table>
                 <tr>
                     <td><label>Title</label></td>
@@ -102,11 +109,11 @@ require_once('../../includes/functions.inc.php');
         </form>
         <?php
         if (isset($_GET["error"])) {
-            if ($_GET["error"] == "emptyinput") {
+            if ($_GET["error"] == "emptyInput") {
                 echo "<p class=\"warning\">Fill in all the fields!</p>";
-            } else if ($_GET["error"] == "stmtfailed") {
+            } else if ($_GET["error"] == "stmtFailed") {
                 echo "<p class=\"warning\">Something went wrong!</p>";
-            } else if ($_GET["error"] == "cantdelete") {
+            } else if ($_GET["error"] == "cantDelete") {
                 echo "<p class=\"warning\">Can't delete the issue at the moment!</p>";
             } else if ($_GET["error"] == "none") {
                 echo "<p class='success'>Message Sent!</p>";

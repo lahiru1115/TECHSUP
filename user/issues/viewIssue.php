@@ -42,6 +42,13 @@ require_once('../../includes/functions.inc.php');
                 ?>
             </div>
             <div>
+                <a href="../main/dashboard.php">
+                    <div class="item click">
+                        <img src="../../assets/home-outline-white-24dp.png">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <br>
                 <a href="../issues/addIssue.php">
                     <div class="item click">
                         <img src="../../assets/add-outline-white-24dp">
@@ -50,7 +57,7 @@ require_once('../../includes/functions.inc.php');
                 </a>
                 <br>
                 <a href="#" class="disabled">
-                    <div class="item click">
+                    <div class="item click active">
                         <img src="../../assets/issue-outline-white-24dp.png">
                         <span>Your Issues</span>
                     </div>
@@ -66,7 +73,7 @@ require_once('../../includes/functions.inc.php');
                     </div>
                 </a>
             </div>
-            <a href="../../includes/logout.inc.php">
+            <a href="../../includes/userLogout.inc.php">
                 <div class="item logout">
                     <img src="../../assets/logout-outline-white-24dp.png">
                     <span>Logout</span>
@@ -81,7 +88,7 @@ require_once('../../includes/functions.inc.php');
                 <tr>
                     <th class="thLeft">Issue Id</th>
                     <th class="thLeft">Title</th>
-                    <th class="thLeft">Description</th>
+                    <th class="thLeft descr">Description</th>
                     <th class="thLeft">Date & Time</th>
                     <th class="thLeft">Status</th>
                     <th>Delete</th>
@@ -109,11 +116,11 @@ require_once('../../includes/functions.inc.php');
         </table>
         <?php
         if (isset($_GET["error"])) {
-            if ($_GET["error"] == "cantupdate") {
+            if ($_GET["error"] == "cantUpdate") {
                 echo "<p class=\"warning\">Can't update the issue at the moment!</p>";
-            } else if ($_GET["error"] == "cantdelete") {
+            } else if ($_GET["error"] == "cantDelete") {
                 echo "<p class=\"warning\">Can't delete the issue at the moment!</p>";
-            } else if ($_GET["error"] == "notworking") {
+            } else if ($_GET["error"] == "notWorking") {
                 echo "<p class=\"success\">There are no issues available!</p>";
             } else if ($_GET["error"] == "deleted") {
                 echo "<p class=\"success\">Issue details Deleted!</p>";

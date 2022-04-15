@@ -1,5 +1,4 @@
 <?php
-  require_once('../../includes/dbh.inc.php');
-  require_once('../../includes/functions.inc.php');
-  adminDeleteIssue($conn);
-?>
+require_once('../../includes/dbh.inc.php');
+require_once('../../includes/functions.inc.php');
+adminDeleteIssue($conn);

@@ -19,7 +19,7 @@ session_start();
       <?php
       if (isset($_SESSION["usersId"])) {
         echo "<li><a href='../profile/profile.php'>Profile</a></li>";
-        echo "<li><a href='../includes/logout.inc.php'>Log Out</a></li>";
+        echo "<li><a href='../includes/userLogout.inc.php'>Log Out</a></li>";
       } else {
         echo "<li><a href='../login/login.php'>Login</a></li>";
         echo "<li><a href='../register/register.php'>Signup</a></li>";

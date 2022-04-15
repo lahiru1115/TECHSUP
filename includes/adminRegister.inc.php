@@ -1,7 +1,7 @@
 <?php
 
-require_once 'dbh.inc.php';
-require_once 'functions.inc.php';
+require_once('dbh.inc.php');
+require_once('functions.inc.php');
 
 $name = $_POST["name"];
 $email = $_POST["email"];
