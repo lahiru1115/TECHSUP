@@ -410,6 +410,22 @@ function adminUpdateIssue($conn, $issueId, $status)
     }
 }
 
+// User view issues
+function yourIssues($conn, $userId)
+{
+    $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' ORDER BY timestamp DESC;";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        return $result;
+        exit();
+    } else {
+        // header("location: ../user/issues/viewIssue.php?error=notworking");
+        echo "<p class=\"success2\">There are no issues available!</p>";
+        exit();
+    }
+}
+
 // Admin get pending issue details of all users
 function adminPendingIssues($conn)
 {
