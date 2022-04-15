@@ -7,4 +7,10 @@ Password: 1234
 
 ## User login details
 Username: ucsc<br>
-Password: ucsc
+Password: ucsc<br><br>
+Username: Kavishka<br>
+Password: 1234<br><br>
+Username: Munzira<br>
+Password: 1234<br><br>
+Username: Lahiru<br>
+Password: 1234<br>

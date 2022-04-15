@@ -303,24 +303,6 @@ function addIssue($conn, $userId, $title, $description, $status)
     exit();
 }
 
-function addUser($conn, $name, $email, $phone, $pwd)
-{
-    $sql = "INSERT INTO users (usersName, usersEmail, usersPhone, usersPwd) VALUES (?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin/panel/adduser.php?error=stmtfailed");
-        exit();
-    }
-
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $phone, $hashedPwd);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    header("location: ../admin/panel/adduser.php?error=none");
-    exit();
-}
-
 // Admin & User get user details for update
 function getUserDataUpdate($conn)
 {
@@ -424,21 +406,6 @@ function adminUpdateIssue($conn, $issueId, $status)
         exit();
     } else {
         header("location: ../admin/issues/viewIssue.php?error=cantUpdate");
-        exit();
-    }
-}
-
-function yourIssues($conn, $userId)
-{
-    $sql = "SELECT issueId, title, description, timestamp, IF(status, 'Solved', 'Pending') status FROM issue WHERE userId='$userId' ORDER BY timestamp DESC;";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        return $result;
-        exit();
-    } else {
-        // header("location: ../user/issues/viewIssue.php?error=notworking");
-        echo "<p class=\"success2\">There are no issues available!</p>";
         exit();
     }
 }
