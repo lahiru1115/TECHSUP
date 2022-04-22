@@ -1,0 +1,2 @@
+$result = die($name);
+print_r($result);
