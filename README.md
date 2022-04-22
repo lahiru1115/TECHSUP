@@ -14,7 +14,3 @@ Username: Munzira<br>
 Password: 1234<br><br>
 Username: Lahiru<br>
 Password: 1234<br>
-
-## Test
-$result = die($name);<br>
-print_r($result);
