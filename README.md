@@ -1,5 +1,7 @@
 # UCSC-PWAD-TECHSUP
 
+This is a group project from the Programming for Web Application Development course module in the 2nd semester at UCSC.
+
 ## Admin login details
 Access username: admin@2<br>
 Username: Admin<br>
