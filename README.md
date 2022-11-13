@@ -2,12 +2,14 @@
 
 This is a group project from the Programming for Web Application Development course module in the 2nd semester at UCSC.
 
-## Admin login details
+## Admin Login Credentials
+
 Access username: admin@2<br>
 Username: Admin<br>
 Password: 1234
 
-## User login details
+## User Login Credentials
+
 Username: ucsc<br>
 Password: ucsc<br><br>
 Username: Kavishka<br>
