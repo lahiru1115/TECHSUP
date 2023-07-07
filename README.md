@@ -91,7 +91,7 @@ Contributions are welcome! If you'd like to contribute to TECHSUP, please follow
 
 ## Contact
 
-For any inquiries or support regarding E-FINE, please reach out to the project maintainer:
+For any inquiries or support regarding TECHSUP, please reach out to the project maintainer:
 
 - Name: [Lahiru Dissanayake](https://github.com/lahiru1115)
 - Email: [lahirudissanayake15@gmail.com](mailto:lahirudissanayake15@gmail.com)
