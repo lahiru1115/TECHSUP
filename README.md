@@ -97,7 +97,3 @@ For any inquiries or support regarding TECHSUP, please reach out to the project 
 - Email: [lahirudissanayake15@gmail.com](mailto:lahirudissanayake15@gmail.com)
 
 Feel free to report any issues or suggest enhancements via the [issue tracker](https://github.com/lahiru1115/TECHSUP/issues).
-
-## Acknowledgements
-
-Special thanks to the developers and contributors of these projects for their remarkable work.
