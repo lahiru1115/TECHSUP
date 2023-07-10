@@ -1,5 +1,7 @@
 # TECHSUP: Online IT Services Management System
 
+![Cover Photo](assets/screenshots/Header.png)
+
 TECHSUP is an online platform designed to streamline the management of IT services. It provides a convenient and efficient way for users to report and track IT issues, while allowing administrators to effectively manage and resolve these issues.
 
 ## Features
@@ -74,6 +76,59 @@ Use the following credentials to log in as a user:
 
 - Username: Lahiru <br>
   Password: 1234
+
+## Screenshots
+
+<table>
+  <tr>
+    <td>
+      <img src="assets/screenshots/Screenshot-1.png" alt="Screenshot 1">
+    </td>
+    <td>
+      <img src="assets/screenshots/Screenshot-2.png" alt="Screenshot 2">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="assets/screenshots/Screenshot-3.png" alt="Screenshot 3">
+    </td>
+    <td>
+      <img src="assets/screenshots/Screenshot-4.png" alt="Screenshot 4">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="assets/screenshots/Screenshot-5.png" alt="Screenshot 5">
+    </td>
+    <td>
+      <img src="assets/screenshots/Screenshot-6.png" alt="Screenshot 6">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="assets/screenshots/Screenshot-7.png" alt="Screenshot 7">
+    </td>
+    <td>
+      <img src="assets/screenshots/Screenshot-8.png" alt="Screenshot 8">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="assets/screenshots/Screenshot-9.png" alt="Screenshot 9">
+    </td>
+    <td>
+      <img src="assets/screenshots/Screenshot-10.png" alt="Screenshot 10">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="assets/screenshots/Screenshot-11.png" alt="Screenshot 11">
+    </td>
+    <td>
+      <img src="assets/screenshots/Screenshot-12.png" alt="Screenshot 12">
+    </td>
+  </tr>
+</table>
 
 ## Contributing
 
