@@ -525,10 +525,10 @@ function userUpdateProfile($conn, $userId, $pwd)
     $update_query = mysqli_query($conn, $sql);
 
     if ($update_query) {
-        header("location: ../user/profile/updateUser.php?error=none");
+        header("location: ../user/profile/updateUser.php?userId=" . $userId . "&error=none");
         exit();
     } else {
-        header("location: ../user/profile/updateUser.php?error=cantUpdate");
+        header("location: ../user/profile/updateUser.php?userId=" . $userId . "&error=cantUpdate");
         exit();
     }
 }

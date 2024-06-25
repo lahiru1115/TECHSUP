@@ -13,7 +13,7 @@ $repwd = $_POST["repwd"];
 if (isset($_POST["submit"])) {
 
     if (userUpdateEmptyInput($pwd, $repwd) !== false) {
-        header("location: ../user/profile/updateUser.php?error=emptyInput");
+        header("Location: ../user/profile/updateUser.php?userId=" . $userId . "&error=emptyInput");
         exit();
     }
 
@@ -28,12 +28,12 @@ if (isset($_POST["submit"])) {
     // }
 
     if (pwdMatch($pwd, $repwd) !== false) {
-        header("location: ../profile/updateUser.php?error=pwdDontMatch");
+        header("location: ../user/profile/updateUser.php?userId=" . $userId . "&error=pwdDontMatch");
         exit();
     }
 
     userUpdateProfile($conn, $userId, $pwd);
 } else {
-    header("location: ../profile/updateUser.php");
+    header("location: ../user/profile/updateUser.php?userId=" . $userId);
     exit();
 }

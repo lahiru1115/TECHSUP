@@ -124,6 +124,8 @@ $row = getUserDataUpdate($conn);
                 echo "<p class=\"warning\">Invalid Username!</p>";
             } else if ($_GET["error"] == "invalidEmail") {
                 echo "<p class=\"warning\">Invalid Email!</p>";
+            } else if ($_GET["error"] == "emptyInput") {
+                echo "<p class=\"warning\">Fill in all fields!</p>";
             } else if ($_GET["error"] == "cantUpdate") {
                 echo "<p class=\"warning\">Can't update the user at the moment!</p>";
             } else if ($_GET["error"] == "pwdDontMatch") {
