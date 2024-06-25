@@ -52,7 +52,7 @@ require_once('../../includes/functions.inc.php');
                 <br>
                 <a href="../issues/addIssue.php">
                     <div class="item click">
-                        <img src="../../assets/add-outline-white-24dp">
+                        <img src="../../assets/add-outline-white-24dp.png">
                         <span>Add Issue</span>
                     </div>
                 </a>
@@ -69,7 +69,7 @@ require_once('../../includes/functions.inc.php');
                 ?>
                 <a href="../profile/updateUser.php?userId=<?php echo $userId; ?>">
                     <div class="item click">
-                        <img src="../../assets/manageAccounts-outline-white-24dp">
+                        <img src="../../assets/manageAccounts-outline-white-24dp.png">
                         <span>Settings</span>
                     </div>
                 </a>

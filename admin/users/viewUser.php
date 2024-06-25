@@ -65,7 +65,7 @@ require_once('../../includes/functions.inc.php');
                 <br>
                 <a href="../main/register.php">
                     <div class="item click">
-                        <img src="../../assets/addAdmin-outline-white-24dp">
+                        <img src="../../assets/addAdmin-outline-white-24dp.png">
                         <span>Create new admin</span>
                     </div>
                 </a>

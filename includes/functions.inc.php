@@ -506,6 +506,17 @@ function adminMostIssues($conn)
     }
 }
 
+// User update profile empty input check (Only password)
+function userUpdateEmptyInput($pwd, $repwd) 
+{
+    if (empty($pwd) || empty($repwd)) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+}
+
 // User update profile (Only password)
 function userUpdateProfile($conn, $userId, $pwd)
 {

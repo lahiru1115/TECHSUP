@@ -11,7 +11,9 @@
 <body>
 
     <div class="navbar">
-        <img src="assets/techsup-logo-white.png" class="logo">
+        <a href="index.php">
+            <img src="assets/techsup-logo-white.png" class="logo">
+        </a>
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="user/main/register.php">Register</a></li>

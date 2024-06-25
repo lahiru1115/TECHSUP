@@ -52,7 +52,7 @@ $row = getUserDataUpdate($conn);
                 <br>
                 <a href="../issues/addIssue.php">
                     <div class="item click">
-                        <img src="../../assets/add-outline-white-24dp">
+                        <img src="../../assets/add-outline-white-24dp.png">
                         <span>Add Issue</span>
                     </div>
                 </a>
@@ -66,7 +66,7 @@ $row = getUserDataUpdate($conn);
                 <br>
                 <a href="#" class="disabled">
                     <div class="item click active">
-                        <img src="../../assets/manageAccounts-outline-white-24dp">
+                        <img src="../../assets/manageAccounts-outline-white-24dp.png">
                         <span>Settings</span>
                     </div>
                 </a>

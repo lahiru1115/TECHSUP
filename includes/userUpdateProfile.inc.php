@@ -12,10 +12,10 @@ $repwd = $_POST["repwd"];
 
 if (isset($_POST["submit"])) {
 
-    // if (emptyInput($userName, $userEmail, $userPhone, $pwd, $repwd) !== false) {
-    //     header("location: ../user/profile/updateUser.php?error=emptyInput");
-    //     exit();
-    // }
+    if (userUpdateEmptyInput($pwd, $repwd) !== false) {
+        header("location: ../user/profile/updateUser.php?error=emptyInput");
+        exit();
+    }
 
     // if (invaliduName($userName) !== false) {
     //     header("location: ../profile/updateUser.php?error=invaliduName");
