@@ -110,7 +110,7 @@ require_once('../../includes/functions.inc.php');
                                 } ?></td>
                             <td><?php echo $row['timestamp']; ?></td>
                             <td><?php echo $row['status']; ?></td>
-                            <td><a href="viewDetails.php?issueId=<?php echo $row['issueId']; ?>"><img src="../../assets/readMore-outline-white-24dp"></a></td>
+                            <td><a href="viewDetails.php?issueId=<?php echo $row['issueId']; ?>"><img src="../../assets/readMore-outline-white-24dp.png"></a></td>
                             <td><a href="updateIssue.php?issueId=<?php echo $row['issueId']; ?>"><img src="../../assets/edit-outline-white-24dp.png"></a></td>
                             <td><a href="deleteIssue.php?issueId=<?php echo $row['issueId']; ?>" onclick="return confirm('Do you really want to delete this record?')"><img src="../../assets/delete-outline-white-24dp.png"></a></td>
                         </tr>
