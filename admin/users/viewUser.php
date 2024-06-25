@@ -121,7 +121,7 @@ require_once('../../includes/functions.inc.php');
             } else if ($_GET["error"] == "cantUpdate") {
                 echo "<p class=\"warning\">Can't update the user at the moment!</p>";
             } else if ($_GET["error"] == "cantDelete") {
-                echo "<p class=\"warning\">Can't delete the user at the moment!</p>";
+                echo "<p class=\"warning\">Can't delete the user if the user has issues!</p>";
             } else if ($_GET["error"] == "notWorking") {
                 echo "<p class=\"success\">There are no users available!</p>";
             } else if ($_GET["error"] == "none") {

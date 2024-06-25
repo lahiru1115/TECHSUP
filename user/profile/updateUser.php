@@ -110,9 +110,9 @@ $row = getUserDataUpdate($conn);
                 <tr>
                     <td><button type="submit" name="submit">UPDATE</button></td>
                     <td>
-                        <div class="del">
+                        <!-- <div class="del">
                             <a href="deleteUser.php?userId=<?php echo $row['userId']; ?>" onclick="return confirm('Are you sure you want to delete your account?')"><button>Delete the Account</button></a>
-                        </div>
+                        </div> -->
                     </td>
                 </tr>
             </table>
